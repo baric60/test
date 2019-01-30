@@ -1,26 +1,20 @@
 import * as React from "react";
-import { of } from "rxjs";
-import { map, tap, delay } from "rxjs/operators";
-
+import { BehaviorSubject } from "rxjs";
+import { ApplicationService } from "../services/application/application.service";
 export type TApplicationProps = {};
-export type TApplicationState = {};
+export type TApplicationState = {
+  data$: BehaviorSubject<string>;
+};
 
 export class Application extends React.Component<
   TApplicationProps,
   TApplicationState
 > {
-  render() {
-    this.getVersion();
-    return <div />;
-  }
-
-  private getVersion: () => void = () => {
-    of(true)
-      .pipe(
-        map(flag => !flag),
-        delay(4000),
-        tap(console.log)
-      )
-      .subscribe();
+  readonly state: TApplicationState = {
+    data$: ApplicationService.data$
   };
+
+  render() {
+    return <div>Hello!</div>;
+  }
 }
