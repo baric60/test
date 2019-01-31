@@ -1,1 +1,15 @@
-{}
+{
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "[typescript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "prettier.tslintIntegration": true,
+  "prettier.eslintIntegration": true,
+  "prettier.javascriptEnable": [],
+  "prettier.cssEnable": [],
+  "prettier.jsonEnable": [],
+  "prettier.graphqlEnable": []
+}

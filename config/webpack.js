@@ -35,20 +35,19 @@ module.exports = function() {
     },
 
     entry: {
-      app: "./index.tsx"
-      // vendor: ["react", "react-dom"]
+      app: path.resolve(__dirname, "../src/index.tsx")
     },
 
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "../dist"),
       filename: "[name].bundle.js"
     },
 
     plugins: [
       new HtmlWebpackPlugin({
         title: "Custom template using Handlebars",
-        filename: "index.html",
-        template: "./index.html",
+        filename: path.resolve(__dirname, "../dist/index.html"),
+        template: path.resolve(__dirname, "../src/index.html"),
         inject: "body"
       }),
       new webpack.HotModuleReplacementPlugin()

@@ -1,1 +1,1 @@
-import "./src/webpack";
+require("config/webpack.js");
