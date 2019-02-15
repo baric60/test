@@ -1,0 +1,14 @@
+{
+  "packages": [
+    "ex-client",
+    "ex-backend"
+  ],
+  "commands": {
+    "bootstrap": {
+      "hoist": [
+        "**"
+      ]
+    }
+  },
+  "version": "0.0.0"
+}

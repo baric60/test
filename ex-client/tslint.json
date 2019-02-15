@@ -1,0 +1,21 @@
+{
+    "rules": {
+        "strict-generator-types": [
+          true
+        ],
+        "prettier": true,
+        "no-unused-variable": true,
+        "disallow-imports": [
+          true,
+          {
+            "from": [
+              "."
+            ],
+            "to": [
+              "../ex-backend/src",
+            ]
+          }
+        ],
+        "no-duplicate-switch-case": true
+      },
+}
