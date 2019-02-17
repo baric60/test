@@ -1,19 +1,19 @@
 {
-
-    "name": "platform",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "bootstrap": "lerna bootstrap",
-        "test": "lerna run test:ci",
-        "clean": "lerna clean",
-        "clean:build": "lerna exec -- rimraf lib",
-        "release": "lerna publish",
-        "ls": "lerna ls",
-        "client": "cd ex-client && npm run build:dev"
-    },
-    "devDependencies": {
-        "lerna": "^3.13.0"
-    }
+  "name": "root",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test:ci",
+    "clean": "lerna clean",
+    "clean:build": "lerna exec -- rimraf lib",
+    "release": "lerna publish",
+    "ls": "lerna ls",
+    "client": "cd ex-client && npm run build:dev",
+    "platform": "cd ex-platform && npm run build"
+  },
+  "devDependencies": {
+    "lerna": "^3.13.0"
+  }
 }

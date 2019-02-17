@@ -1,13 +1,8 @@
 {
-  "packages": [
-    "ex-client",
-    "ex-backend"
-  ],
-  "commands": {
+  "packages": ["ex-client", "ex-backend", "ex-platform"],
+  "command": {
     "bootstrap": {
-      "hoist": [
-        "**"
-      ]
+      "hoist": ["**"]
     }
   },
   "version": "0.0.0"
