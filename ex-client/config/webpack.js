@@ -27,11 +27,15 @@ module.exports = function() {
 					],
 				},
 				{ enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
+				{
+					test: /\.styl$/,
+					loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/',
+				},
 			],
 		},
 
 		resolve: {
-			extensions: ['.ts', '.jsx', '.tsx', '.js'],
+			extensions: ['.ts', '.jsx', '.tsx', '.js', 'css', '.styl'],
 		},
 
 		entry: {
@@ -57,17 +61,6 @@ module.exports = function() {
 			contentBase: path.join(__dirname, 'dist'),
 			compress: true,
 			port: 8888,
-		},
-
-		node: {
-			console: false,
-			global: true,
-			process: true,
-			__filename: 'mock',
-			__dirname: 'mock',
-			Buffer: true,
-			setImmediate: true,
-			fs: 'empty',
 		},
 	};
 };

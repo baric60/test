@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RemoteDataUtils } from '../../../../common/utils/remote-data.utils';
 import { MultipleRemoteDataUtils } from '../../../../common/utils/multiple-remote-data.utils';
 import { RenderMultipleRemoteData } from '../../../../common/components/render-multiple-remote-data.components';
+import * as applicationCss from './theme/application.styl';
 
 export type TApplicationProps = {
 	name: string;
@@ -17,6 +18,7 @@ export class Application extends React.Component<TApplicationProps, TApplication
 		const datas = MultipleRemoteDataUtils.concat(data1, data2, data3, data4);
 
 		console.log(datas);
+		console.log(applicationCss);
 
 		return (
 			<div>

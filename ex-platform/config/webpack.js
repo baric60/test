@@ -9,8 +9,6 @@ module.exports = function() {
 
 		target: 'web',
 
-		context: path.resolve(__dirname),
-
 		module: {
 			rules: [
 				{
@@ -18,19 +16,29 @@ module.exports = function() {
 					loader: 'ts-loader',
 				},
 				{
-					test: /\.html$/,
-					use: [
-						{
-							loader: 'html-loader',
-						},
-					],
+					test: /\.css$/,
+					loader: 'typings-for-css-modules-loader?modules&namedExport',
 				},
-				{ enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
+				{
+					test: /\.styl$/,
+					loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/',
+				},
 			],
 		},
 
 		resolve: {
-			extensions: ['.ts', '.jsx', '.tsx', '.js'],
+			extensions: ['.ts', '.jsx', '.tsx', '.js', 'css', '.styl'],
 		},
+
+		entry: {
+			app: path.resolve(__dirname, '../src/components/button/button.tsx'),
+		},
+
+		output: {
+			path: path.resolve(__dirname, '../dist'),
+			filename: '[name].bundle.js',
+		},
+
+		plugins: [new webpack.HotModuleReplacementPlugin()],
 	};
 };

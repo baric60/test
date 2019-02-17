@@ -14,6 +14,12 @@
     "fp-ts": "^1.11.3"
   },
   "devDependencies": {
-    "webpack": "3.8.0"
+    "decss-loader": "^0.3.0",
+    "isomorphic-style-loader": "^4.0.0",
+    "style-loader": "^0.23.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "typings-for-css-modules-loader": "^1.7.0",
+    "webpack": "^4.26.1"
   }
 }
