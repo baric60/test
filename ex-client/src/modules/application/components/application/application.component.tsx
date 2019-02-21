@@ -2,12 +2,12 @@ import * as React from 'react';
 import { RemoteDataUtils } from '../../../../common/utils/remote-data.utils';
 import { MultipleRemoteDataUtils } from '../../../../common/utils/multiple-remote-data.utils';
 import { RenderMultipleRemoteData } from '../../../../common/components/render-multiple-remote-data.components';
-import * as applicationCss from './theme/application.styl';
 import { StyledUtils } from '../../../../common/utils/styled.utils';
+import { PartialKeys } from '../../../../common/utils/with-defaults.utils';
 
 export type TApplicationProps = {
 	name: string;
-	className: string;
+	theme: PartialKeys<any, any>;
 };
 export type TApplicationState = {};
 
@@ -23,8 +23,11 @@ class ApplicationComponent extends React.Component<TApplicationProps, TApplicati
 
 		console.log(this.props);
 
+		const theme = {};
+
 		return (
-			<div className={this.props.className}>
+			<div>
+				aaa
 				{/* {RenderMultipleRemoteData({
 					datas,
 					success: ([data1, data2, data3]) => {
@@ -36,12 +39,15 @@ class ApplicationComponent extends React.Component<TApplicationProps, TApplicati
 	}
 }
 
-console.log(applicationCss);
-
 const styles = {
 	'font-family': 'Helvetica',
 	'font-weight': 'bold',
 	'font-size': '1.8rem',
 };
 
-export const Application = StyledUtils.styledComponent(styles)(ApplicationComponent);
+const theme = {
+	container: styles,
+};
+
+// export const Application = StyledUtils.styledComponent(styles)(ApplicationComponent);
+export const Application = StyledUtils.withTheme(theme)(ApplicationComponent);
