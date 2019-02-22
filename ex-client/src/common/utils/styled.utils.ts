@@ -7,10 +7,14 @@ export namespace StyledUtils {
 		styles: CSSObject,
 	) => (component: ComponentClass) => StyledComponent<ComponentClass, P> = styles => target => styled(target)(styles);
 
-	export const withTheme = <P extends object = never, S = never, T>(theme: P) => (children: any): Component<T> => {
-		return class extends Component<{}, {}> {
+	export const withTheme = <P extends object = never, S = never, T extends object = never>(theme: P) => (
+		target: any,
+	): any => {
+		return class extends Component {
 			render() {
-				return createElement(WithTheme, { theme, children });
+				console.log(theme);
+
+				return createElement(WithTheme, { theme, target });
 			}
 		};
 	};

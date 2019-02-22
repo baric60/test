@@ -8,7 +8,7 @@ import withRX = WithRxUtils.withRX;
 import { merge } from 'rxjs';
 import { compose } from 'fp-ts/lib/function';
 import { withDefaults } from '../../../../common/utils/with-defaults.utils';
-import { TApplicationProps, Application } from '../../components/application/application.component';
+import { TApplicationProps, ApplicationComponent } from '../../components/application/application.component';
 
 type TApplicationContext = {
 	localStorage: TLocalStorage;
@@ -19,22 +19,20 @@ const defaults = withDefaults<TApplicationProps, Defaults>({
 	name: '',
 });
 
-const FooContainer = asks((context: TApplicationContext) => {
+const FooContainer = combine(ApplicationComponent, ApplicationComponent => {
 	const rx = withRX<TApplicationProps>(() => {
 		return merge();
 	});
 
-	const enhance = compose(
-		defaults,
-		rx,
-	);
+	// const enhance = compose(
+	// 	defaults,
+	// 	rx,
+	// );
 
-	const app = enhance(Application);
-
-	return app;
+	return ApplicationComponent;
 });
 
-const result2 = combine(FooContainer, ask(), (Container, context) => {
+const result2 = combine(FooContainer, Container => {
 	return Container;
 });
 

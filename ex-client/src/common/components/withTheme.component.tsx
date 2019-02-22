@@ -3,13 +3,13 @@ import { Component, createElement, ComponentClass } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 export type TWithThemeProps = {
-	theme: Object;
-	children: ComponentClass;
+	theme: any;
+	target: ComponentClass;
 };
 
 export class WithTheme extends Component<TWithThemeProps, {}> {
 	render() {
-		const { theme, children } = this.props;
-		return <ThemeProvider theme={theme}>{createElement(children)}</ThemeProvider>;
+		const { target, theme } = this.props;
+		return <ThemeProvider theme={theme}>{createElement(target, { theme })}</ThemeProvider>;
 	}
 }
