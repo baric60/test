@@ -1,22 +1,23 @@
 import { CSSObject } from 'styled-components';
 
 export type TApplicationTheme = {
-	container: CSSObject;
-	wrapper: CSSObject;
+	block: CSSObject;
+	input: CSSObject;
 };
-const container = {
-	'font-family': 'Helvetica',
-	'font-weight': 'bold',
-	'font-size': '1.8rem',
+const block = {
+	width: '100%',
+	height: '20px',
+	background: 'red',
 };
 
-const wrapper = {
+const input = {
 	'font-family': 'Helvetica',
 	'font-weight': 'bold',
 	'font-size': '1.8rem',
+	background: 'green',
 };
 
 export const theme: TApplicationTheme = {
-	container,
-	wrapper,
+	block,
+	input,
 };

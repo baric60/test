@@ -24,10 +24,10 @@ const FooContainer = combine(ApplicationComponent, ApplicationComponent => {
 		return merge();
 	});
 
-	// const enhance = compose(
-	// 	defaults,
-	// 	rx,
-	// );
+	const enhance = compose(
+		defaults,
+		rx,
+	);
 
 	return ApplicationComponent;
 });
