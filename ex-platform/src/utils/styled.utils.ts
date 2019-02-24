@@ -1,60 +1,65 @@
-import { ComponentClass, Component, ComponentType } from 'react';
+import { ComponentClass, Component, ComponentType, ChangeEvent } from 'react';
 import styled, { CSSObject, StyledComponent, ThemeProvider, DefaultTheme, ThemedStyledProps } from 'styled-components';
 import { createElement } from 'react';
 import { element } from 'prop-types';
 
 export type TCustomStyledClassProps = {
 	styles: CSSObject;
+	as?: 'div' | 'p' | 'ul' | 'li' | 'a';
 	children?: any;
 	className?: string;
-	as?: 'div' | 'ul' | 'li' | 'a';
 };
 
-class CustomStyledClass extends Component<TCustomStyledClassProps, {}> {
-	constructor(props: TCustomStyledClassProps) {
-		super(props);
-	}
-
+export class CustomStyledClass extends Component<TCustomStyledClassProps, {}> {
 	static defaultProps = {
 		as: 'div',
 		styles: {},
 	};
 
 	render() {
-		const { styles, as } = this.props;
+		const { styles, as, children } = this.props;
 		const element = styled(as)(styles);
-		return createElement(element);
+		return createElement(element, {}, children);
 	}
 }
 
 export type TStyledInputProps = {
 	styles: CSSObject;
-	type?: 'text' | 'checkbox' | 'submit';
+	type?: 'input' | 'text' | 'checkbox' | 'submit';
 	value?: string;
+	defaultValue?: string;
 	size?: number | ((props: ThemedStyledProps<CSSObject, any>) => number);
+	onChange?: (value: string) => void;
 };
 
-class StyledInputClass<A> extends Component<TStyledInputProps, {}> {
-	constructor(props: TStyledInputProps) {
-		super(props);
-	}
-
+export class StyledInputClass extends Component<TStyledInputProps, {}> {
 	static defaultProps = {
 		type: 'text',
 		styles: {},
-		value: '',
+		defaultValue: '',
 		size: 100,
+		onChange: () => {},
 	};
 
 	render() {
-		const { styles, type, value, size } = this.props;
+		const { styles, type, defaultValue, size, children } = this.props;
+		const onChange = this.onChange;
 		const element = styled.input.attrs({
 			type,
-			value,
+			defaultValue,
 			size,
+			onChange,
+			children,
 		})(styles);
 		return createElement(element);
 	}
+
+	private onChange: (element: any) => void = element => {
+		console.log(element);
+		if (element.value !== this.props.value) {
+			this.props.onChange(element.value);
+		}
+	};
 }
 
 export namespace StyledUtils {
@@ -62,19 +67,15 @@ export namespace StyledUtils {
 		styles: CSSObject,
 	) => (component: ComponentClass) => StyledComponent<ComponentClass, P> = styles => target => styled(target)(styles);
 
-	export const StyledComponent = CustomStyledClass;
-	export const StyledInput = StyledInputClass;
-
 	export const withTheme = <P extends object = never, S = never, T extends object = never>(theme: DefaultTheme) => (
 		children: ComponentType,
-	): any => {
-		return class StyledClass<T extends object, U extends object> extends ThemeProvider {
+	): any =>
+		class ThemeComponent<T extends object, U extends object> extends ThemeProvider {
 			static propTypes = { children: element };
 
 			static defaultProps = {
 				theme,
-				children: createElement('div'),
+				children: createElement(children),
 			};
 		};
-	};
 }

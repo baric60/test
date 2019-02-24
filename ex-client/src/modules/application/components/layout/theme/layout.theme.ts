@@ -4,12 +4,13 @@ export type TLayoutTheme = {
 	container: CSSObject;
 	wrapper: CSSObject;
 };
+
 const container = {
-	'font-size': '1.8rem',
+	widht: '100%',
 };
 
 const wrapper = {
-	'font-family': 'Helvetica',
+	fontFamily: 'Helvetica',
 };
 
 export const theme: TLayoutTheme = {

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { StyledUtils } from '../../../../common/utils/styled.utils';
-import { theme } from './theme/layout.sass';
-import CustomStyledClass = StyledUtils.StyledComponent;
+import { StyledUtils } from '../../../../../../ex-platform/src/utils/styled.utils';
+import { theme } from './theme/layout.theme';
+import { DivStyled } from '../../../../common/components/styled.component';
 
 export type TLayoutComponentProps = {
 	name: string;
@@ -10,7 +10,7 @@ export type TLayoutComponentProps = {
 
 class RawLayoutComponent extends Component<TLayoutComponentProps, {}> {
 	render() {
-		return <CustomStyledClass />;
+		return <DivStyled styles={theme}>aaa</DivStyled>;
 	}
 }
 

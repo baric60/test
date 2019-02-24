@@ -1,31 +1,52 @@
 import * as React from 'react';
-import { StyledUtils, TStyledInputProps } from '../../../../common/utils/styled.utils';
+import { StyledUtils } from '../../../../../../ex-platform/src/utils/styled.utils';
 import { LayoutContainer } from '../../containers/layout/layout.container';
 import { ReaderUtils } from '../../../../common/utils/reader.utils';
-import { theme, TApplicationTheme } from './theme/application.sass';
-import StyledComponent = StyledUtils.StyledComponent;
-import StyledInput = StyledUtils.StyledInput;
+import { theme, TApplicationTheme } from './theme/application.theme';
+import { DivStyled, InputStyled, PrintStyled } from '../../../../common/components/styled.component';
 
 export type TApplicationProps = {
 	name: string;
 	theme: TApplicationTheme;
 };
+
+export type TApplicationState = {
+	value: string;
+};
+
 export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutContainer => {
-	class RawApplication extends React.Component<TApplicationProps, {}> {
+	class RawApplication extends React.Component<TApplicationProps, TApplicationState> {
+		state = {
+			value: 'value',
+		};
+
 		render() {
+			const { value } = this.state;
+
 			return (
 				<div>
-					<StyledComponent styles={theme.block}>
-						<div />
-					</StyledComponent>
-					<StyledInput type="submit" value="someThing" styles={theme.input} size={this.calculateSize} />
-					<LayoutContainer />
+					<DivStyled styles={theme.container}>
+						<PrintStyled styles={theme.text}>Some text</PrintStyled>
+						<InputStyled
+							defaultValue={value}
+							styles={theme.input}
+							size={this.calculateSize}
+							onChange={this.onChange}
+						/>
+						<LayoutContainer />
+					</DivStyled>
 				</div>
 			);
 		}
 
 		private calculateSize = () => {
 			return 1111;
+		};
+
+		private onChange = (value: string) => {
+			this.setState({
+				value,
+			});
 		};
 	}
 
