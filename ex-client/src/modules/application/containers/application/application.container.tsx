@@ -1,14 +1,14 @@
-import * as React from 'react';
 import { ReaderUtils } from '../../../../common/utils/reader.utils';
 import combine = ReaderUtils.combine;
-import { asks, ask, URI } from 'fp-ts/lib/reader';
 import { TLocalStorage, LocalStorage } from '../../../services/storage/storage.service';
-import { WithRxUtils, WithRXSelector } from '../../../../common/utils/with-utils';
+import { WithRxUtils } from '../../../../common/utils/with-utils';
 import withRX = WithRxUtils.withRX;
-import { merge } from 'rxjs';
+import { merge, of } from 'rxjs';
 import { compose } from 'fp-ts/lib/function';
 import { withDefaults } from '../../../../common/utils/with-defaults.utils';
 import { TApplicationProps, ApplicationComponent } from '../../components/application/application.component';
+import { map } from 'rxjs/operators';
+import { toKeyValue } from '../../../../../../ex-platform/src/utils/rx.utils';
 
 type TApplicationContext = {
 	localStorage: TLocalStorage;
@@ -20,6 +20,8 @@ const defaults = withDefaults<TApplicationProps, Defaults>({
 });
 
 const FooContainer = combine(ApplicationComponent, ApplicationComponent => {
+	const name$ = of('string');
+
 	const rx = withRX<TApplicationProps>(() => {
 		return merge();
 	});
@@ -29,7 +31,7 @@ const FooContainer = combine(ApplicationComponent, ApplicationComponent => {
 		rx,
 	);
 
-	return ApplicationComponent;
+	return enhance(ApplicationComponent);
 });
 
 const result2 = combine(FooContainer, Container => {

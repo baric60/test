@@ -1,13 +1,11 @@
-import { ComponentType } from 'react';
-import { Omit } from 'lodash';
-
-export declare type PartialKeys<T extends {}, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+import { ComponentType, ComponentClass } from 'react';
+import { PartialKey } from './object.utils';
 
 export function withDefaults<P extends object, Keys extends keyof P>(
-	defaults: Pick<P, Keys>,
-): (Target: ComponentType<P>) => any {
+	defaults: P,
+): (Target: ComponentClass<P>) => ComponentType<PartialKey<P, Keys>> {
 	return Target => {
-		// Target.defaultProps = Object.assign({}, Target.defaultProps || {}, defaults);
-		return Target as any;
+		Target.defaultProps = Object.assign({}, Target.defaultProps || {}, defaults);
+		return Target;
 	};
 }

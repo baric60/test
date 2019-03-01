@@ -55,7 +55,6 @@ export class StyledInputClass extends Component<TStyledInputProps, {}> {
 	}
 
 	private onChange: (element: any) => void = element => {
-		console.log(element);
 		if (element.value !== this.props.value) {
 			this.props.onChange(element.value);
 		}
@@ -67,9 +66,7 @@ export namespace StyledUtils {
 		styles: CSSObject,
 	) => (component: ComponentClass) => StyledComponent<ComponentClass, P> = styles => target => styled(target)(styles);
 
-	export const withTheme = <P extends object = never, S = never, T extends object = never>(theme: DefaultTheme) => (
-		children: ComponentType,
-	): any =>
+	export const withTheme = <P extends object>(theme: DefaultTheme) => (children: ComponentType<P>): ComponentType =>
 		class ThemeComponent<T extends object, U extends object> extends ThemeProvider {
 			static propTypes = { children: element };
 

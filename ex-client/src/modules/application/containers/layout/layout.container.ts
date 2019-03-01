@@ -4,7 +4,8 @@ import { withDefaults } from '../../../../common/utils/with-defaults.utils';
 import { LayoutComponent, TLayoutComponentProps } from '../../components/layout/layout.component';
 import { WithRxUtils } from '../../../../common/utils/with-utils';
 import withRX = WithRxUtils.withRX;
-import { merge } from 'rxjs';
+import { merge, of } from 'rxjs';
+import { toKeyValue } from '../../../../../../ex-platform/src/utils/rx.utils';
 
 export type LayoutContext = {
 	// localStorage: number;
@@ -13,12 +14,14 @@ export type LayoutContext = {
 type Defaults = 'name';
 
 export const LayoutContainer = asks((ctx: LayoutContext) => {
+	const name$ = of('string');
+
 	const defaults = withDefaults<TLayoutComponentProps, Defaults>({
 		name: '',
 	});
 
 	const rx = withRX<TLayoutComponentProps>(() => {
-		return merge();
+		return merge(name$.pipe(toKeyValue('name')));
 	});
 
 	const enhance = compose(

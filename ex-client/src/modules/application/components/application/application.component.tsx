@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ComponentType } from 'react';
 import { StyledUtils } from '../../../../../../ex-platform/src/utils/styled.utils';
 import { LayoutContainer } from '../../containers/layout/layout.container';
 import { ReaderUtils } from '../../../../common/utils/reader.utils';
@@ -7,7 +8,7 @@ import { DivStyled, InputStyled, PrintStyled } from '../../../../common/componen
 
 export type TApplicationProps = {
 	name: string;
-	theme: TApplicationTheme;
+	theme?: TApplicationTheme;
 };
 
 export type TApplicationState = {
@@ -21,21 +22,20 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 		};
 
 		render() {
+			const { name } = this.props;
 			const { value } = this.state;
 
 			return (
-				<div>
-					<DivStyled styles={theme.container}>
-						<PrintStyled styles={theme.text}>Some text</PrintStyled>
-						<InputStyled
-							defaultValue={value}
-							styles={theme.input}
-							size={this.calculateSize}
-							onChange={this.onChange}
-						/>
-						<LayoutContainer />
-					</DivStyled>
-				</div>
+				<DivStyled styles={theme.container}>
+					<PrintStyled styles={theme.text}>Some name - ${name}</PrintStyled>
+					<InputStyled
+						defaultValue={value}
+						styles={theme.input}
+						size={this.calculateSize}
+						onChange={this.onChange}
+					/>
+					<LayoutContainer />
+				</DivStyled>
 			);
 		}
 
@@ -50,5 +50,7 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 		};
 	}
 
-	return StyledUtils.styledComponent(theme)(RawApplication);
+	const application: ComponentType<any> = StyledUtils.withTheme(theme)(RawApplication);
+
+	return application;
 });
