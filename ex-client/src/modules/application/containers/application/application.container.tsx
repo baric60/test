@@ -5,10 +5,11 @@ import { WithRxUtils } from '../../../../common/utils/with-utils';
 import withRX = WithRxUtils.withRX;
 import { merge, of } from 'rxjs';
 import { compose } from 'fp-ts/lib/function';
-import { withDefaults } from '../../../../common/utils/with-defaults.utils';
+import { withDefaults } from '../../../../../../ex-platform/src/utils/with-defaults.utils';
 import { TApplicationProps, ApplicationComponent } from '../../components/application/application.component';
 import { map } from 'rxjs/operators';
 import { toKeyValue } from '../../../../../../ex-platform/src/utils/rx.utils';
+import { ask } from 'fp-ts/lib/Reader';
 
 type TApplicationContext = {
 	localStorage: TLocalStorage;
@@ -16,14 +17,14 @@ type TApplicationContext = {
 
 type Defaults = 'name';
 const defaults = withDefaults<TApplicationProps, Defaults>({
-	name: '',
+	name: 'aaa',
 });
 
 const FooContainer = combine(ApplicationComponent, ApplicationComponent => {
 	const name$ = of('string');
 
 	const rx = withRX<TApplicationProps>(() => {
-		return merge();
+		return merge(name$.pipe(toKeyValue('name')));
 	});
 
 	const enhance = compose(

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SFC } from 'react';
+import { FunctionComponent } from 'react';
 import {
 	CustomStyledClass,
 	StyledInputClass,
@@ -7,19 +7,21 @@ import {
 	TStyledInputProps,
 } from '../../../../ex-platform/src//utils/styled.utils';
 
-export const DivStyled: SFC<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
+export const DivStyled: FunctionComponent<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
 	<CustomStyledClass {...props} />
 );
-export const PrintStyled: SFC<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
+export const PrintStyled: FunctionComponent<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
 	<CustomStyledClass as="p" {...props} />
 );
-export const ListStyled: SFC<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
+export const ListStyled: FunctionComponent<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
 	<CustomStyledClass as="ul" {...props} />
 );
-export const ListItemStyled: SFC<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
+export const ListItemStyled: FunctionComponent<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
 	<CustomStyledClass as="li" {...props} />
 );
-export const InputStyled: SFC<TStyledInputProps> = (props: TStyledInputProps) => <StyledInputClass {...props} />;
-export const CheckboxStyled: SFC<TStyledInputProps> = (props: TStyledInputProps) => (
+export const InputStyled: FunctionComponent<TStyledInputProps> = (props: TStyledInputProps) => (
+	<StyledInputClass {...props} />
+);
+export const CheckboxStyled: FunctionComponent<TStyledInputProps> = (props: TStyledInputProps) => (
 	<StyledInputClass type="checkbox" {...props} />
 );

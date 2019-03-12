@@ -1,6 +1,6 @@
 import { asks } from 'fp-ts/lib/reader';
 import { compose } from 'fp-ts/lib/function';
-import { withDefaults } from '../../../../common/utils/with-defaults.utils';
+import { withDefaults } from '../../../../../../ex-platform/src/utils/with-defaults.utils';
 import { LayoutComponent, TLayoutComponentProps } from '../../components/layout/layout.component';
 import { WithRxUtils } from '../../../../common/utils/with-utils';
 import withRX = WithRxUtils.withRX;

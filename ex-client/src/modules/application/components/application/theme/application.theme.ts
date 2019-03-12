@@ -4,6 +4,7 @@ export type TApplicationTheme = {
 	container: CSSObject;
 	input: CSSObject;
 	text: CSSObject;
+	button: CSSObject;
 };
 
 const container: CSSObject = {
@@ -20,13 +21,20 @@ const input: CSSObject = {
 	width: '400px',
 };
 
-const text: CSSObject = {
+const text = {
 	fontFamily: 'Helvetica',
 	color: 'black',
+};
+
+const button = {
+	container: {
+		display: 'block',
+	},
 };
 
 export const theme: TApplicationTheme = {
 	container,
 	input,
 	text,
+	button,
 };

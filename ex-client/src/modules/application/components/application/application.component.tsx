@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { ComponentType } from 'react';
-import { StyledUtils } from '../../../../../../ex-platform/src/utils/styled.utils';
+import { Component } from 'react';
 import { LayoutContainer } from '../../containers/layout/layout.container';
 import { ReaderUtils } from '../../../../common/utils/reader.utils';
 import { theme, TApplicationTheme } from './theme/application.theme';
 import { DivStyled, InputStyled, PrintStyled } from '../../../../common/components/styled.component';
+import { PartialKey } from '../../../../common/utils/object.utils';
+import { Button } from '../../../../common/components/button/button';
+export * from '@devexperts/react-kit/dist/components/Popover/Popover';
 
-export type TApplicationProps = {
+type TRawApplicationProps = {
 	name: string;
 	theme?: TApplicationTheme;
 };
@@ -16,7 +18,7 @@ export type TApplicationState = {
 };
 
 export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutContainer => {
-	class RawApplication extends React.Component<TApplicationProps, TApplicationState> {
+	return class RawApplication extends Component<TRawApplicationProps, TApplicationState> {
 		state = {
 			value: 'value',
 		};
@@ -27,13 +29,14 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 
 			return (
 				<DivStyled styles={theme.container}>
-					<PrintStyled styles={theme.text}>Some name - ${name}</PrintStyled>
+					<PrintStyled styles={theme.text}>Some name - {name}</PrintStyled>
 					<InputStyled
 						defaultValue={value}
 						styles={theme.input}
 						size={this.calculateSize}
 						onChange={this.onChange}
 					/>
+					<Button theme={theme.button} />
 					<LayoutContainer />
 				</DivStyled>
 			);
@@ -48,9 +51,7 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 				value,
 			});
 		};
-	}
-
-	const application: ComponentType<any> = StyledUtils.withTheme(theme)(RawApplication);
-
-	return application;
+	};
 });
+
+export type TApplicationProps = PartialKey<TRawApplicationProps, 'theme'>;

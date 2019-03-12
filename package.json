@@ -10,8 +10,9 @@
     "clean:build": "lerna exec -- rimraf lib",
     "release": "lerna publish",
     "ls": "lerna ls",
-    "client": "cd ex-client && npm run build:dev",
-    "platform": "cd ex-platform && npm run build"
+    "lerna": "lerna",
+    "platform": "cd ex-platform && npm run build",
+    "start:client": "npm run lerna -- run build --scope=ex-platform --parallel --scope=ex-client && npm run lerna -- run start"
   },
   "devDependencies": {
     "lerna": "^3.13.0"

@@ -1,5 +1,5 @@
 {
-  "name": "ex-platform",
+  "name": "@ex-platform/ui-build-tools",
   "version": "1.0.0",
   "description": "",
   "scripts": {
