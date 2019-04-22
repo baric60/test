@@ -6,6 +6,7 @@ import { Omit } from 'lodash';
 import { theme } from './theme/button.theme';
 import { withDefaults } from '../../utils/with-defaults.utils';
 import { withTheme } from '../../utils/with-theme.utils';
+import { PartialKey } from '../../utils/object.utils';
 
 const defaults = {
 	count: 2,
@@ -15,7 +16,6 @@ export const DivStyled: React.FunctionComponent<TCustomStyledClassProps> = (prop
 	<CustomStyledClass {...props} />
 );
 
-type PartialKey<P extends object, K extends keyof P> = Omit<P, K>;
 class RawButton extends Component<TRawButtonProps, TButtonState> {
 	render() {
 		const { theme, disabled, icon, onClick, onDoubleClick } = this.props;

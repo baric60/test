@@ -4,6 +4,7 @@ import { CSSObject } from 'styled-components';
 import { Omit } from 'lodash';
 import * as CSS from 'csstype';
 export { CSSObject } from 'styled-components';
+import { PartialKey } from './object.utils';
 
 export type TTheme<P extends object> = {
 	[key in string]:
@@ -15,8 +16,7 @@ export type TTheme<P extends object> = {
 type TTargetProps = { theme?: TTheme<TTargetProps> };
 
 type CT<P> = ComponentType<P>;
-declare type PartialKeys<T extends {}, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-type OmitTheme<P extends TTargetProps> = PartialKeys<P, 'theme'>;
+type OmitTheme<P extends TTargetProps> = PartialKey<P, 'theme'>;
 type TResult<P extends TTargetProps, C extends ComponentType<P>> = ComponentClass<
 	OmitTheme<
 		P & {

@@ -5,11 +5,9 @@ import { WithRxUtils } from '../../../../common/utils/with-utils';
 import withRX = WithRxUtils.withRX;
 import { merge, of } from 'rxjs';
 import { compose } from 'fp-ts/lib/function';
-import { withDefaults } from '../../../../../../ex-platform/src/utils/with-defaults.utils';
+import { withDefaults } from 'ex-platform/src/utils/with-defaults.utils';
 import { TApplicationProps, ApplicationComponent } from '../../components/application/application.component';
-import { map } from 'rxjs/operators';
-import { toKeyValue } from '../../../../../../ex-platform/src/utils/rx.utils';
-import { ask } from 'fp-ts/lib/Reader';
+import { toKeyValue } from 'ex-platform/src/utils/rx.utils';
 
 type TApplicationContext = {
 	localStorage: TLocalStorage;
