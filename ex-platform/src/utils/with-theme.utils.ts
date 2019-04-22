@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createElement } from 'react';
+import { createElement, Component, ComponentClass, ComponentType, Ref } from 'react';
 import { CSSObject } from 'styled-components';
 import { Omit } from 'lodash';
 import * as CSS from 'csstype';
@@ -14,13 +14,13 @@ export type TTheme<P extends object> = {
 
 type TTargetProps = { theme?: TTheme<TTargetProps> };
 
-type CT<P> = React.ComponentType<P>;
+type CT<P> = ComponentType<P>;
 declare type PartialKeys<T extends {}, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 type OmitTheme<P extends TTargetProps> = PartialKeys<P, 'theme'>;
-type TResult<P extends TTargetProps, C extends React.ComponentType<P>> = React.ComponentClass<
+type TResult<P extends TTargetProps, C extends ComponentType<P>> = ComponentClass<
 	OmitTheme<
 		P & {
-			withRef?: React.Ref<any>;
+			withRef?: Ref<any>;
 		}
 	>
 >;
@@ -29,15 +29,12 @@ type TResultProps<P extends TTargetProps> = Omit<P, 'theme'> & {
 	theme?: P['theme'];
 };
 type TWithRef<P extends TTargetProps, C> = TResultProps<P> & {
-	withRef?: React.Ref<C>;
+	withRef?: Ref<C>;
 };
 
 export const withTheme = <S extends object>(name: string, defaultTheme: TTheme<S>) => {
 	function decorate<P extends TTargetProps>(target: CT<P>): TResult<P, CT<P>> {
-		return class ThemedComponent extends React.Component<
-			TWithRef<P, React.ComponentClass<TResultProps<P>>>,
-			never
-		> {
+		return class ThemedComponent extends Component<TWithRef<P, ComponentClass<TResultProps<P>>>, never> {
 			render() {
 				const { withRef } = this.props;
 				const rest: any = Object.assign({}, this.props);
@@ -110,9 +107,6 @@ const mergeTwoThemes = <P extends {}>(props: P, original: CSSObject = {}, mixin:
 						result[key] = transformFunctionsToString(props, mixinValue);
 						break;
 					}
-					// case 'function': {
-					// 	break;
-					// }
 					default: {
 						throw new Error(`You are merging object ${key} with a non-object ${defaultValue}`);
 					}

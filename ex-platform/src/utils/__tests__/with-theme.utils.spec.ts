@@ -8,9 +8,11 @@ type TComponentProps = {
 describe('with-theme.utils', () => {
 	describe('mergeThemes', () => {
 		it('should return empty theme', () => {
-			const props = {};
-			const theme1 = {};
-			const result = {};
+			const props: TComponentProps = {
+				value: 1,
+			};
+			const theme1: TTheme<TComponentProps> = {};
+			const result: CSSObject = {};
 
 			expect(mergeThemes(props, theme1)).toEqual(result);
 		});
@@ -72,6 +74,9 @@ describe('with-theme.utils', () => {
 		});
 
 		it('should merge two themes', () => {
+			const props: TComponentProps = {
+				value: 1,
+			};
 			const container: TTheme<TComponentProps> = {
 				height: '30px',
 				width: '20px',
@@ -93,20 +98,26 @@ describe('with-theme.utils', () => {
 				...button,
 			};
 			const secondTheme: TTheme<TComponentProps> = {
-				container: Object.assign({}, container, {
-					width: '30px',
-					background: () => 'red',
-				}),
-				button: Object.assign({}, button, {
-					container: {
+				container: {
+					...container,
+					...{
 						width: '30px',
-						height: '30px',
-						padding: '2px 2px 3px 1px',
+						background: () => 'red',
 					},
-					icon: {
-						color: 'red',
+				},
+				button: {
+					...button,
+					...{
+						container: {
+							width: '30px',
+							height: '30px',
+							padding: '2px 2px 3px 1px',
+						},
+						icon: {
+							color: 'red',
+						},
 					},
-				}),
+				},
 			};
 			const result: CSSObject = {
 				container: {
@@ -131,7 +142,7 @@ describe('with-theme.utils', () => {
 			console.log(mergeThemes({}, firstTheme, secondTheme));
 			console.log(result);
 
-			expect(mergeThemes({}, firstTheme, secondTheme)).toEqual(result);
+			expect(mergeThemes(props, firstTheme, secondTheme)).toEqual(result);
 		});
 
 		it('should merge three themes', () => {
