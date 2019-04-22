@@ -1,10 +1,12 @@
-import { CSSObject } from 'styled-components';
+import { createGlobalStyle, CSSObject } from 'styled-components';
+import { TRawApplicationProps } from '../application.model';
+import { TTheme } from '../../../../../../../ex-platform/src/utils/with-theme.utils';
 
 export type TApplicationTheme = {
 	container: CSSObject;
 	input: CSSObject;
 	text: CSSObject;
-	button: CSSObject;
+	button: TTheme<TRawApplicationProps>;
 };
 
 const container: CSSObject = {
@@ -26,9 +28,14 @@ const text = {
 	color: 'black',
 };
 
-const button = {
+const button: TTheme<TRawApplicationProps> = {
 	container: {
 		display: 'block',
+		color: 'red',
+		background: (props: TRawApplicationProps) => {
+			console.log(props);
+			return props.color;
+		},
 	},
 };
 
@@ -38,3 +45,9 @@ export const theme: TApplicationTheme = {
 	text,
 	button,
 };
+
+export const GlobalStyle = createGlobalStyle`
+body {
+  color: red
+}
+`;

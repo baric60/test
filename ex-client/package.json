@@ -1,5 +1,5 @@
 {
-  "name": "front",
+  "name": "ex-client",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "jest": {
+    "rootDir": "../",
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
@@ -22,7 +23,6 @@
     ]
   },
   "dependencies": {
-    "@assetmark/ui-build-tools": "*",
     "@devexperts/react-kit": "0.22.1",
     "@devexperts/utils": "0.19.1",
     "es6-promise": "^4.2.5",

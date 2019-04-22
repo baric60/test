@@ -2,6 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = function() {
+	const index = [path.resolve(__dirname, '../src/components/button/button.component.tsx')];
+	const dist = path.resolve(path.join(process.cwd()), 'dist');
+
 	return {
 		mode: 'development',
 
@@ -31,12 +34,14 @@ module.exports = function() {
 		},
 
 		entry: {
-			app: path.resolve(__dirname, '../src/components/button/button.tsx'),
+			index,
 		},
 
 		output: {
-			path: path.resolve(__dirname, '../dist'),
-			filename: '[name].bundle.js',
+			path: dist,
+			publicPath: '/',
+			filename: '[name].[hash].js',
+			pathinfo: true,
 		},
 
 		plugins: [new webpack.HotModuleReplacementPlugin()],

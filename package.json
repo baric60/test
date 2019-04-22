@@ -12,7 +12,8 @@
     "ls": "lerna ls",
     "lerna": "lerna",
     "platform": "cd ex-platform && npm run build",
-    "start:client": "npm run lerna -- run build --scope=ex-platform --parallel --scope=ex-client && npm run lerna -- run start"
+    "start:client": "npm run lerna -- run build --scope=ex-platform --parallel --scope=ex-client && npm run lerna -- run start",
+    "test:platform": "npm run lerna -- run test --scope=ex-platform"
   },
   "devDependencies": {
     "lerna": "^3.13.0"

@@ -1,44 +1,41 @@
 import * as React from 'react';
-import { Component } from 'react';
+import { Component, Fragment } from 'react';
 import { LayoutContainer } from '../../containers/layout/layout.container';
 import { ReaderUtils } from '../../../../common/utils/reader.utils';
-import { theme, TApplicationTheme } from './theme/application.theme';
-import { DivStyled, InputStyled, PrintStyled } from '../../../../common/components/styled.component';
+import { theme, GlobalStyle } from './theme/application.theme';
+import { DivStyled } from '../../../../common/components/styled.component';
 import { PartialKey } from '../../../../common/utils/object.utils';
-import { Button } from '../../../../common/components/button/button';
-export * from '@devexperts/react-kit/dist/components/Popover/Popover';
-
-type TRawApplicationProps = {
-	name: string;
-	theme?: TApplicationTheme;
-};
-
-export type TApplicationState = {
-	value: string;
-};
+import { Button } from '../../../../common/components/button/button.component';
+import { withTheme } from '../../../../../../ex-platform/src/utils/with-theme.utils';
+import { TRawApplicationProps, TApplicationState } from './application.model';
 
 export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutContainer => {
-	return class RawApplication extends Component<TRawApplicationProps, TApplicationState> {
+	class RawApplication extends Component<TRawApplicationProps, TApplicationState> {
 		state = {
 			value: 'value',
 		};
 
 		render() {
-			const { name } = this.props;
+			const { color } = this.props;
 			const { value } = this.state;
 
+			console.log(color);
+
 			return (
-				<DivStyled styles={theme.container}>
-					<PrintStyled styles={theme.text}>Some name - {name}</PrintStyled>
-					<InputStyled
-						defaultValue={value}
-						styles={theme.input}
-						size={this.calculateSize}
-						onChange={this.onChange}
-					/>
-					<Button theme={theme.button} />
-					<LayoutContainer />
-				</DivStyled>
+				<Fragment>
+					<DivStyled styles={theme.container}>
+						{/* <PrintStyled styles={theme.text}>Some name - {name}</PrintStyled>
+						<InputStyled
+							defaultValue={value}
+							styles={theme.input}
+							size={this.calculateSize}
+							onChange={this.onChange}
+						/> */}
+						<Button theme={theme.button} />
+						{/* <LayoutContainer /> */}
+					</DivStyled>
+					<GlobalStyle />
+				</Fragment>
 			);
 		}
 
@@ -51,7 +48,9 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 				value,
 			});
 		};
-	};
+	}
+
+	return withTheme('ButtonComponent', theme)(RawApplication);
 });
 
 export type TApplicationProps = PartialKey<TRawApplicationProps, 'theme'>;

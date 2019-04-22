@@ -15,9 +15,9 @@ type TApplicationContext = {
 	localStorage: TLocalStorage;
 };
 
-type Defaults = 'name';
+type Defaults = 'color';
 const defaults = withDefaults<TApplicationProps, Defaults>({
-	name: 'aaa',
+	color: 'aaa',
 });
 
 const FooContainer = combine(ApplicationComponent, ApplicationComponent => {

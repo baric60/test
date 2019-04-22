@@ -2,6 +2,9 @@ import { ComponentClass, Component, ComponentType, ChangeEvent } from 'react';
 import styled, { CSSObject, StyledComponent, ThemeProvider, DefaultTheme, ThemedStyledProps } from 'styled-components';
 import { createElement } from 'react';
 import { element } from 'prop-types';
+import * as CSS from 'csstype';
+
+export type TStyles = { [property in string]: CSS.Properties<string | number>[keyof CSS.Properties<string | number>] };
 
 export type TCustomStyledClassProps = {
 	styles: CSSObject;
@@ -22,22 +25,6 @@ export class CustomStyledClasss extends Component<TCustomStyledClassProps, {}> {
 		return createElement(element, {}, children);
 	}
 }
-
-// const styledTransformator: (props: any) => Component = props => {
-// 	const decorate = (target: ComponentClass) => {
-// 		return class extends Component<TCustomStyledClassProps> {
-// 			static displayName: string = `Styled${props.as}`;
-
-// 			render() {
-// 				const { styles, as, children } = this.props;
-// 				const element = styled(as)(styles);
-// 				return createElement(element, {}, children);
-// 			}
-// 		};
-// 	};
-
-// 	return decorate;
-// };
 
 export const CustomStyledClass = CustomStyledClasss;
 
@@ -81,9 +68,10 @@ export class StyledInputClass extends Component<TStyledInputProps, {}> {
 
 export namespace StyledUtils {
 	export const styledComponent: <P extends Object>(
+		name: string | symbol,
 		styles: CSSObject,
-	) => (component: ComponentClass) => StyledComponent<ComponentClass<any>, P> = styles => target =>
-		styled(target)(styles);
+	) => (component: ComponentClass) => StyledComponent<ComponentClass<any>, P> = (name, styles) => target =>
+		styled(target).attrs({ as: 'titlesubtitle' })(styles);
 
 	export const withTheme = <P extends object>(theme: DefaultTheme) => (children: ComponentType<P>): ComponentType =>
 		class ThemeComponent<T extends object, U extends object> extends ThemeProvider {
