@@ -61,7 +61,7 @@ export function mergeThemes<P extends object>(props: P, ...themes: TTheme<P>[]):
 	) as CSSObject;
 }
 
-function transformFunctionsToString<P extends {}>(props: P, theme: TTheme<P>): CSSObject {
+function transformateThemeToCSSObject<P extends {}>(props: P, theme: TTheme<P>): CSSObject {
 	return Object.keys(theme).reduce(
 		(acc, key) => {
 			const value = theme[key];
@@ -104,7 +104,7 @@ const mergeTwoThemes = <P extends {}>(props: P, original: CSSObject = {}, mixin:
 						break;
 					}
 					case 'undefined': {
-						result[key] = transformFunctionsToString(props, mixinValue);
+						result[key] = transformateThemeToCSSObject(props, mixinValue);
 						break;
 					}
 					default: {
