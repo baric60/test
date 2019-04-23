@@ -31,7 +31,8 @@
     "observable-input": "^2.0.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.3.3",
+    "ex-platform": "*"
   },
   "devDependencies": {
     "@types/jest": "^23.3.13",

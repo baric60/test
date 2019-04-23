@@ -4,9 +4,9 @@ import { LayoutContainer } from '../../containers/layout/layout.container';
 import { ReaderUtils } from '../../../../common/utils/reader.utils';
 import { theme, GlobalStyle } from './theme/application.theme';
 import { DivStyled } from '../../../../common/components/styled.component';
-import { PartialKey } from '../../../../common/utils/object.utils';
+import { PartialKey } from 'ex-platform/src/utils/object.utils';
 import { Button } from '../../../../common/components/button/button.component';
-import { withTheme } from '../../../../../../ex-platform/src/utils/with-theme.utils';
+import { withTheme } from 'ex-platform/src/utils/with-theme.utils';
 import { TRawApplicationProps, TApplicationState } from './application.model';
 
 export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutContainer => {
