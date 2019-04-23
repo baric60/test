@@ -1,13 +1,11 @@
 import { ReactElement, EventHandler, MouseEvent } from 'react';
-import { CSSObject } from 'styled-components';
+import { MakeTheme, TTheme } from '../../utils/theme.utils';
 
 export type TRawButtonProps = {
-	theme: {
-		container: CSSObject;
-	};
+	theme: MakeTheme<'container' | 'content' | 'icon', TTheme>;
 	disabled?: boolean;
-	onClick?: EventHandler<MouseEvent<HTMLDivElement>>;
-	onDoubleClick?: EventHandler<MouseEvent<HTMLDivElement>>;
+	onClick?: EventHandler<MouseEvent<HTMLElement>>;
+	onDoubleClick?: EventHandler<MouseEvent<HTMLElement>>;
 	icon?: ReactElement;
 	count: number;
 };

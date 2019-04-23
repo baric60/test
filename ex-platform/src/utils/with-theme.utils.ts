@@ -1,18 +1,11 @@
 import { createElement, Component, ComponentClass, ComponentType, Ref } from 'react';
 import { CSSObject } from 'styled-components';
 import { Omit } from 'lodash';
-import * as CSS from 'csstype';
 export { CSSObject } from 'styled-components';
 import { PartialKey } from './object.utils';
+import { TTheme, TFunctionalTheme } from './theme.utils';
 
-export type TTheme<P extends object> = {
-	[key in string]:
-		| CSS.Properties<string | number>[keyof CSS.Properties<string | number>]
-		| CSS.Properties<(props: P) => string | number>[keyof CSS.Properties<(props: any) => string | number>]
-		| TTheme<P>
-};
-
-type TTargetProps = { theme?: TTheme<TTargetProps> };
+type TTargetProps = { theme?: TFunctionalTheme<TTargetProps> };
 
 type CT<P> = ComponentType<P>;
 type OmitTheme<P extends TTargetProps> = PartialKey<P, 'theme'>;
@@ -31,7 +24,7 @@ type TWithRef<P extends TTargetProps, C> = TResultProps<P> & {
 	withRef?: Ref<C>;
 };
 
-export const withTheme = <S extends object>(name: string, defaultTheme: TTheme<S>) => {
+export const withTheme = <S extends object>(name: string, defaultTheme: TFunctionalTheme<S>) => {
 	function decorate<P extends TTargetProps>(target: CT<P>): TResult<P, CT<P>> {
 		return class ThemedComponent extends Component<TWithRef<P, ComponentClass<TResultProps<P>>>, never> {
 			render() {
@@ -53,14 +46,14 @@ export const withTheme = <S extends object>(name: string, defaultTheme: TTheme<S
 	return decorate;
 };
 
-export function mergeThemes<P extends object>(props: P, ...themes: TTheme<P>[]): CSSObject {
+export function mergeThemes<P extends object>(props: P, ...themes: TFunctionalTheme<P>[]): CSSObject {
 	return themes.reduce(
-		(acc: CSSObject, theme: TTheme<P>) => mergeTwoThemes(props, acc, theme),
+		(acc: CSSObject, theme: TFunctionalTheme<P>) => mergeTwoThemes(props, acc, theme),
 		{} as CSSObject,
 	) as CSSObject;
 }
 
-function transformateThemeToCSSObject<P extends {}>(props: P, theme: TTheme<P>): CSSObject {
+function transformateThemeToCSSObject<P extends {}>(props: P, theme: TFunctionalTheme<P>): CSSObject {
 	return Object.keys(theme).reduce(
 		(acc, key) => {
 			const value = theme[key];
@@ -80,7 +73,11 @@ function transformateThemeToCSSObject<P extends {}>(props: P, theme: TTheme<P>):
 	);
 }
 
-const mergeTwoThemes = <P extends {}>(props: P, original: CSSObject = {}, mixin: TTheme<P> = {}): CSSObject => {
+const mergeTwoThemes = <P extends {}>(
+	props: P,
+	original: CSSObject = {},
+	mixin: TFunctionalTheme<P> = {},
+): CSSObject => {
 	const result: CSSObject = Object.keys(original).reduce(
 		(acc, key) => Object.assign({}, acc, { [key]: original[key] }),
 		{} as CSSObject,

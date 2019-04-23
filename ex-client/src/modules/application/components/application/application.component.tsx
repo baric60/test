@@ -16,7 +16,7 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 		};
 
 		render() {
-			const { color } = this.props;
+			const { color, theme } = this.props;
 			const { value } = this.state;
 
 			console.log(color);

@@ -1,22 +1,16 @@
 import { createGlobalStyle, CSSObject } from 'styled-components';
 import { TRawApplicationProps } from '../application.model';
-import { TTheme } from 'ex-platform/src/utils/with-theme.utils';
-import { TButtonProps } from 'ex-platform/src/components/button/button.component';
+import { TTheme, TFunctionalTheme, MakeFunctionalTheme } from 'ex-platform/src/utils/theme.utils';
+import { TRawButtonProps } from 'ex-platform/src/components/button/button.model';
+import { TApplicationProps } from '../application.component';
 
-export type TApplicationTheme = {
-	container: CSSObject;
-	input: CSSObject;
-	text: CSSObject;
-	button: TTheme<TRawApplicationProps>;
-};
-
-const container: CSSObject = {
+const container: TFunctionalTheme<TRawApplicationProps> = {
 	display: 'flex',
 	flexWrap: 'wrap',
 	width: '100%',
 };
 
-const input: CSSObject = {
+const input: TFunctionalTheme<TRawApplicationProps> = {
 	fontFamily: 'Helvetica',
 	fontWeight: 'bold',
 	fontSize: '1.8rem',
@@ -24,23 +18,25 @@ const input: CSSObject = {
 	width: '400px',
 };
 
-const text: CSSObject = {
+const text: TTheme = {
 	fontFamily: 'Helvetica',
 	color: 'black',
 };
 
-const button: TTheme<TRawApplicationProps> = {
+const button: MakeFunctionalTheme<TRawButtonProps, TRawApplicationProps> = {
 	container: {
-		display: 'block',
-		color: 'red',
-		background: (props: TRawApplicationProps) => {
-			console.log(props);
-			return props.color;
-		},
+		display: 'flex',
+		width: () => '20px',
+		height: () => '20px',
+		background: (props: TRawApplicationProps) => props.color,
+	},
+	content: {},
+	icon: {
+		color: () => '',
 	},
 };
 
-export const theme: TApplicationTheme = {
+export const theme: MakeFunctionalTheme<TRawApplicationProps> = {
 	container,
 	input,
 	text,

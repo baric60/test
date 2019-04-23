@@ -1,4 +1,4 @@
-import { ComponentClass, Component, ComponentType } from 'react';
+import { ComponentClass, Component, ComponentType, MouseEvent, ReactNode } from 'react';
 import styled, { CSSObject, StyledComponent, ThemeProvider, DefaultTheme } from 'styled-components';
 import { createElement } from 'react';
 import { element } from 'prop-types';
@@ -7,10 +7,12 @@ import * as CSS from 'csstype';
 export type TStyles = { [property in string]: CSS.Properties<string | number>[keyof CSS.Properties<string | number>] };
 
 export type TCustomStyledClassProps = {
-	styles: CSSObject;
+	styles?: CSSObject;
 	as?: 'div' | 'p' | 'ul' | 'li' | 'a';
-	children?: any;
+	children?: ReactNode;
 	className?: string;
+	onClick?: (event: MouseEvent<HTMLElement>) => void;
+	onDoubleClick?: (event: MouseEvent<HTMLElement>) => void;
 };
 
 export class CustomStyledClasss extends Component<TCustomStyledClassProps, {}> {
@@ -20,7 +22,7 @@ export class CustomStyledClasss extends Component<TCustomStyledClassProps, {}> {
 	};
 
 	render() {
-		const { styles, as: tag = 'div', children } = this.props;
+		const { styles = {}, as: tag = 'div', children } = this.props;
 		const element = styled(tag)(styles);
 		return createElement(element, {}, children);
 	}

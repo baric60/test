@@ -6,6 +6,7 @@ import { theme } from './theme/button.theme';
 import { withDefaults } from '../../utils/with-defaults.utils';
 import { withTheme } from '../../utils/with-theme.utils';
 import { PartialKey } from '../../utils/object.utils';
+export { TRawButtonProps } from './button.model';
 
 const defaults = {
 	count: 2,
@@ -23,9 +24,9 @@ class RawButton extends Component<TRawButtonProps, TButtonState> {
 
 		return (
 			<DivStyled styles={theme.container}>
-				<div onClick={onClick} onDoubleClick={onDoubleClick}>
+				<DivStyled styles={theme.content} onClick={onClick} onDoubleClick={onDoubleClick}>
 					{icon}
-				</div>
+				</DivStyled>
 			</DivStyled>
 		);
 	}

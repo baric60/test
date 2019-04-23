@@ -1,5 +1,5 @@
-import { mergeThemes, TTheme } from '../with-theme.utils';
-import { CSSObject } from 'styled-components';
+import { mergeThemes } from '../with-theme.utils';
+import { TFunctionalTheme, TTheme } from '../theme.utils';
 
 type TComponentProps = {
 	value: number;
@@ -11,8 +11,8 @@ describe('with-theme.utils', () => {
 			const props: TComponentProps = {
 				value: 1,
 			};
-			const theme1: TTheme<TComponentProps> = {};
-			const result: CSSObject = {};
+			const theme1: TFunctionalTheme<TComponentProps> = {};
+			const result: TTheme = {};
 
 			expect(mergeThemes(props, theme1)).toEqual(result);
 		});
@@ -21,12 +21,12 @@ describe('with-theme.utils', () => {
 			const props: TComponentProps = {
 				value: 13,
 			};
-			const theme: TTheme<TComponentProps> = {
+			const theme: TFunctionalTheme<TComponentProps> = {
 				container: {
 					width: (props: TComponentProps) => props.value * 10,
 				},
 			};
-			const result: CSSObject = {
+			const result: TTheme = {
 				container: {
 					width: 130,
 				},
@@ -39,17 +39,17 @@ describe('with-theme.utils', () => {
 			const props: TComponentProps = {
 				value: 13,
 			};
-			const firstTheme: TTheme<TComponentProps> = {
+			const firstTheme: TFunctionalTheme<TComponentProps> = {
 				container: {
 					width: (props: TComponentProps) => props.value * 1,
 				},
 			};
-			const secondTheme: TTheme<TComponentProps> = {
+			const secondTheme: TFunctionalTheme<TComponentProps> = {
 				container: {
 					width: (props: TComponentProps) => props.value * 20,
 				},
 			};
-			const result: CSSObject = {
+			const result: TTheme = {
 				container: {
 					width: 260,
 				},
@@ -59,12 +59,12 @@ describe('with-theme.utils', () => {
 		});
 
 		it('should return properties of second theme', () => {
-			const theme: TTheme<TComponentProps> = {
+			const theme: TFunctionalTheme<TComponentProps> = {
 				display: 'flex',
 				color: 'red',
 				background: () => 'white',
 			};
-			const result: CSSObject = {
+			const result: TTheme = {
 				display: 'flex',
 				color: 'red',
 				background: 'white',
@@ -77,12 +77,12 @@ describe('with-theme.utils', () => {
 			const props: TComponentProps = {
 				value: 1,
 			};
-			const container: TTheme<TComponentProps> = {
+			const container: TFunctionalTheme<TComponentProps> = {
 				height: '30px',
 				width: '20px',
 				color: () => 'green',
 			};
-			const button: TTheme<TComponentProps> = {
+			const button: TFunctionalTheme<TComponentProps> = {
 				container: {
 					width: '20px',
 					height: '20px',
@@ -93,11 +93,11 @@ describe('with-theme.utils', () => {
 					color: 'white',
 				},
 			};
-			const firstTheme: TTheme<TComponentProps> = {
+			const firstTheme: TFunctionalTheme<TComponentProps> = {
 				...container,
 				...button,
 			};
-			const secondTheme: TTheme<TComponentProps> = {
+			const secondTheme: TFunctionalTheme<TComponentProps> = {
 				container: {
 					...container,
 					...{
@@ -119,7 +119,7 @@ describe('with-theme.utils', () => {
 					},
 				},
 			};
-			const result: CSSObject = {
+			const result: TTheme = {
 				container: {
 					height: '30px',
 					width: '30px',
