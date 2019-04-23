@@ -1,9 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ROOT = (module.exports.ROOT = path.join(process.cwd()));
+const NODE_MODULES_PATH = (module.exports.NODE_MODULES_PATH = path.resolve(ROOT, 'node_modules'));
+const HOISTED_NODE_MODULES_PATH = (module.exports.HOISTED_NODE_MODULES_PATH = path.resolve(ROOT, '../node_modules'));
 
 module.exports = function() {
 	const index = [path.resolve(__dirname, '../src/components/button/button.component.tsx')];
 	const dist = path.resolve(path.join(process.cwd()), 'dist');
+
+	console.log(HOISTED_NODE_MODULES_PATH);
 
 	return {
 		mode: 'development',
@@ -16,7 +22,14 @@ module.exports = function() {
 			rules: [
 				{
 					test: /\.(ts|tsx)$/,
-					loader: 'ts-loader',
+					use: [
+						{
+							loader: 'ts-loader',
+							options: {
+								transpileOnly: true,
+							},
+						},
+					],
 				},
 				{
 					test: /\.css$/,
@@ -44,6 +57,6 @@ module.exports = function() {
 			pathinfo: true,
 		},
 
-		plugins: [new webpack.HotModuleReplacementPlugin()],
+		plugins: [new webpack.HotModuleReplacementPlugin(), new ForkTsCheckerWebpackPlugin()],
 	};
 };

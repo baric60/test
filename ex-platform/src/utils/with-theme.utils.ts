@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { createElement, Component, ComponentClass, ComponentType, Ref } from 'react';
 import { CSSObject } from 'styled-components';
 import { Omit } from 'lodash';

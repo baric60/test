@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { TRawButtonProps, TButtonState } from './button.model';
-import { CustomStyledClass, StyledInputClass, TCustomStyledClassProps } from '../../utils/styled.utils';
-import { Omit } from 'lodash';
+import { CustomStyledClass, TCustomStyledClassProps } from '../../utils/styled.utils';
 import { theme } from './theme/button.theme';
 import { withDefaults } from '../../utils/with-defaults.utils';
 import { withTheme } from '../../utils/with-theme.utils';
@@ -18,13 +17,12 @@ export const DivStyled: React.FunctionComponent<TCustomStyledClassProps> = (prop
 
 class RawButton extends Component<TRawButtonProps, TButtonState> {
 	render() {
-		const { theme, disabled, icon, onClick, onDoubleClick } = this.props;
-		const { container } = theme;
+		const { theme, icon, onClick, onDoubleClick } = this.props;
 
 		console.log(theme);
 
 		return (
-			<DivStyled styles={container}>
+			<DivStyled styles={theme.container}>
 				<div onClick={onClick} onDoubleClick={onDoubleClick}>
 					{icon}
 				</div>

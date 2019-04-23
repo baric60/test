@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "update": "lerna clean && lerna bootstrap",
     "test": "lerna run test:ci",
     "clean": "lerna clean",
     "clean:build": "lerna exec -- rimraf lib",

@@ -1,8 +1,32 @@
 {
   "compilerOptions": {
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "lib": [
+      "es2016",
+      "dom",
+      "es2017.object"
+    ],
+    "pretty": true,
+    "noUnusedLocals": true,
+    "rootDirs": [
+      "node_modules",
+      "../../node_modules"
+    ],
+    "typeRoots": [
+      "../node_modules/@types",
+      "../../node_modules/@types"
+    ],
+    "types": ["react", "jest"],
+    "outDir": "dist",
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
-    "outDir": "./src/dist/",
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
@@ -10,5 +34,6 @@
     "removeComments": true,
     "preserveConstEnums": true
   },
-  "include": ["./src/**/*", "typings.d.ts"],
+  "include": ["./src/**/*"],
+
 }

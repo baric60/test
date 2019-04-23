@@ -1,6 +1,7 @@
 import { createGlobalStyle, CSSObject } from 'styled-components';
 import { TRawApplicationProps } from '../application.model';
 import { TTheme } from 'ex-platform/src/utils/with-theme.utils';
+import { TButtonProps } from 'ex-platform/src/components/button/button.component';
 
 export type TApplicationTheme = {
 	container: CSSObject;

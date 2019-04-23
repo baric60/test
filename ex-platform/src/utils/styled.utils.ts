@@ -1,5 +1,5 @@
-import { ComponentClass, Component, ComponentType, ChangeEvent } from 'react';
-import styled, { CSSObject, StyledComponent, ThemeProvider, DefaultTheme, ThemedStyledProps } from 'styled-components';
+import { ComponentClass, Component, ComponentType } from 'react';
+import styled, { CSSObject, StyledComponent, ThemeProvider, DefaultTheme } from 'styled-components';
 import { createElement } from 'react';
 import { element } from 'prop-types';
 import * as CSS from 'csstype';
@@ -20,8 +20,8 @@ export class CustomStyledClasss extends Component<TCustomStyledClassProps, {}> {
 	};
 
 	render() {
-		const { styles, as, children } = this.props;
-		const element = styled(as)(styles);
+		const { styles, as: tag = 'div', children } = this.props;
+		const element = styled(tag)(styles);
 		return createElement(element, {}, children);
 	}
 }
@@ -33,7 +33,7 @@ export type TStyledInputProps = {
 	type?: 'input' | 'text' | 'checkbox' | 'submit';
 	value?: string;
 	defaultValue?: string;
-	size?: number | ((props: ThemedStyledProps<CSSObject, any>) => number);
+	// size?: number | ((props: ThemedStyledProps<CSSObject, any>) => number);
 	onChange?: (value: string) => void;
 };
 
@@ -47,23 +47,23 @@ export class StyledInputClass extends Component<TStyledInputProps, {}> {
 	};
 
 	render() {
-		const { styles, type, defaultValue, size, children } = this.props;
-		const onChange = this.onChange;
+		const { styles, type, defaultValue, children } = this.props;
+		// const onChange = this.onChange;
 		const element = styled.input.attrs({
 			type,
 			defaultValue,
-			size,
-			onChange,
+			// size,
+			// onChange,
 			children,
 		})(styles);
 		return createElement(element);
 	}
 
-	private onChange: (element: any) => void = element => {
-		if (element.value !== this.props.value) {
-			this.props.onChange(element.value);
-		}
-	};
+	// private onChange: (element: any) => void = element => {
+	// 	if (element.value !== this.props.value) {
+	// 		this.props.onChange(element.value);
+	// 	}
+	// };
 }
 
 export namespace StyledUtils {
