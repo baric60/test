@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Component, ComponentType } from 'react';
 import { StyledUtils } from 'ex-platform/src/utils/styled.utils';
+import withTheme = StyledUtils.withTheme;
 import { theme } from './theme/layout.theme';
 import { DivStyled } from '../../../../common/components/styled.component';
 import { DefaultTheme } from 'styled-components';
@@ -19,4 +20,4 @@ class RawLayoutComponent extends Component<TRawLayoutComponentProps> {
 
 export type TLayoutComponentProps = PartialKey<TRawLayoutComponentProps, 'theme'>;
 
-export const LayoutComponent: ComponentType<TLayoutComponentProps> = StyledUtils.withTheme(theme)(RawLayoutComponent);
+export const LayoutComponent: ComponentType<TLayoutComponentProps> = withTheme(theme)(RawLayoutComponent);
