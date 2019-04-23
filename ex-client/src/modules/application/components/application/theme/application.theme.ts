@@ -24,7 +24,7 @@ const input: CSSObject = {
 	width: '400px',
 };
 
-const text = {
+const text: CSSObject = {
 	fontFamily: 'Helvetica',
 	color: 'black',
 };

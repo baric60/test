@@ -1,4 +1,5 @@
 {
+  "extends": "./ui-build-tools/tsconfig.json",
   "compilerOptions": {
     "declaration": false,
     "moduleResolution": "node",
