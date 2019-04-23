@@ -1,7 +1,7 @@
-import { ReaderUtils } from '../../../../common/utils/reader.utils';
+import { ReaderUtils } from 'ex-platform/src/utils/reader.utils';
 import combine = ReaderUtils.combine;
 import { TLocalStorage, LocalStorage } from '../../../services/storage/storage.service';
-import { WithRxUtils } from '../../../../common/utils/with-utils';
+import { WithRxUtils } from 'ex-platform/src/utils/with-utils';
 import withRX = WithRxUtils.withRX;
 import { merge, of } from 'rxjs';
 import { compose } from 'fp-ts/lib/function';

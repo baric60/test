@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component, Fragment } from 'react';
 import { LayoutContainer } from '../../containers/layout/layout.container';
-import { ReaderUtils } from '../../../../common/utils/reader.utils';
+import { ReaderUtils } from 'ex-platform/src/utils/reader.utils';
 import { theme, GlobalStyle } from './theme/application.theme';
 import { DivStyled } from '../../../../common/components/styled.component';
 import { PartialKey } from 'ex-platform/src/utils/object.utils';

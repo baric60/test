@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { RemoteData } from '../utils/remote-data.utils';
+import { RemoteData } from 'ex-platform/src/utils/remote-data.utils';
 import { findFirst } from 'fp-ts/lib/Array';
 
 type TMultipleRemoteData<A> = {
