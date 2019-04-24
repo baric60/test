@@ -11,6 +11,6 @@ export type MakeTheme<K extends string, T = string> = { [P in K]?: T };
 
 export type TFunctionalTheme<P extends {}> = { [key in string]: TStyle | TFunctionalStyle<P> | TFunctionalTheme<P> };
 
-export type MakeFunctionalTheme<P extends { theme: TTheme }, T = P> = {
-	[Key in keyof P['theme']]?: TStyle | TFunctionalStyle<T> | TFunctionalTheme<T>
+export type MakeFunctionalTheme<K extends string, T extends TTheme, P extends object> = {
+	[Element in K]: { [Key in keyof T]: TFunctionalTheme<P> } | TFunctionalTheme<P>
 };

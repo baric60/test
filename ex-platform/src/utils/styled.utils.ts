@@ -1,10 +1,11 @@
-import { ComponentClass, Component, ComponentType, MouseEvent, ReactNode } from 'react';
+import { ComponentClass, Component, ComponentType, MouseEvent, ReactNode, FunctionComponent } from 'react';
 import styled, { CSSObject, StyledComponent, ThemeProvider, DefaultTheme } from 'styled-components';
 import { createElement } from 'react';
 import { element } from 'prop-types';
 import * as CSS from 'csstype';
 
 export type TStyles = { [property in string]: CSS.Properties<string | number>[keyof CSS.Properties<string | number>] };
+export type TFunctionalStyledComponent<P extends object> = (props: P) => StyledComponent<ComponentType, P>;
 
 export type TCustomStyledClassProps = {
 	styles?: CSSObject;
@@ -15,7 +16,7 @@ export type TCustomStyledClassProps = {
 	onDoubleClick?: (event: MouseEvent<HTMLElement>) => void;
 };
 
-export class CustomStyledClasss extends Component<TCustomStyledClassProps, {}> {
+export class CustomStyledClass extends Component<TCustomStyledClassProps, {}> {
 	static defaultProps = {
 		as: 'div',
 		styles: {},
@@ -27,8 +28,6 @@ export class CustomStyledClasss extends Component<TCustomStyledClassProps, {}> {
 		return createElement(element, {}, children);
 	}
 }
-
-export const CustomStyledClass = CustomStyledClasss;
 
 export type TStyledInputProps = {
 	styles: CSSObject;

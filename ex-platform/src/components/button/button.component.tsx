@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Component } from 'react';
+import { Component, FunctionComponent, ComponentClass } from 'react';
 import { TRawButtonProps, TButtonState } from './button.model';
 import { CustomStyledClass, TCustomStyledClassProps } from '../../utils/styled.utils';
 import { theme } from './theme/button.theme';
@@ -12,9 +12,7 @@ const defaults = {
 	count: 2,
 };
 
-export const DivStyled: React.FunctionComponent<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
-	<CustomStyledClass {...props} />
-);
+export const DivStyled: FunctionComponent<TCustomStyledClassProps> = props => <CustomStyledClass {...props} />;
 
 class RawButton extends Component<TRawButtonProps, TButtonState> {
 	render() {
