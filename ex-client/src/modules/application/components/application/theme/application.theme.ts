@@ -28,7 +28,6 @@ const button: MakeFunctionalTheme<TRawButtonProps, TRawApplicationProps> = {
 		display: 'flex',
 		width: () => '20px',
 		height: () => '20px',
-		background: (props: TRawApplicationProps) => props.color,
 	},
 	content: {},
 	icon: {
