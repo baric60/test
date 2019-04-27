@@ -1,4 +1,5 @@
 import * as CSS from 'csstype';
+import { ThemeProps } from 'styled-components';
 
 type TStyle = CSS.Properties<string | number>[keyof CSS.Properties<string | number>];
 type TFunctionalStyle<P extends {}> = CSS.Properties<(props: P) => string | number>[keyof CSS.Properties<
@@ -13,4 +14,8 @@ export type TFunctionalTheme<P extends {}> = { [key in string]: TStyle | TFuncti
 
 export type MakeFunctionalTheme<K extends string, T extends TTheme, P extends object> = {
 	[Element in K]: { [Key in keyof T]: TFunctionalTheme<P> } | TFunctionalTheme<P>
+};
+
+export type RevertFunctionalTheme<K extends string, T extends TFunctionalTheme<{}>> = {
+	[Element in K]: { [Key in keyof T]: TTheme } | TTheme
 };

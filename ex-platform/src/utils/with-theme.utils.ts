@@ -12,7 +12,7 @@ type OmitTheme<P extends TTargetProps> = PartialKey<P, 'theme'>;
 type TResult<P extends TTargetProps, C extends ComponentType<P>> = ComponentClass<
 	OmitTheme<
 		P & {
-			withRef?: Ref<any>;
+			withRef?: Ref<never>;
 		}
 	>
 >;
@@ -22,6 +22,7 @@ type TResultProps<P extends TTargetProps> = Omit<P, 'theme'> & {
 };
 type TWithRef<P extends TTargetProps, C> = TResultProps<P> & {
 	withRef?: Ref<C>;
+	theme: TTheme;
 };
 
 export const withTheme = <S extends object>(name: string, defaultTheme: TFunctionalTheme<S>) => {
@@ -31,14 +32,12 @@ export const withTheme = <S extends object>(name: string, defaultTheme: TFunctio
 				const { withRef } = this.props;
 				const rest: any = Object.assign({}, this.props);
 
-				console.log(target);
-
 				const props = {
 					...rest,
 					ref: withRef,
 					theme: mergeThemes(this.props, defaultTheme as any, rest.theme),
 				};
-				return createElement(target as any, props);
+				return createElement(target, props);
 			}
 		};
 	}
@@ -53,27 +52,7 @@ export function mergeThemes<P extends object>(props: P, ...themes: TFunctionalTh
 	) as CSSObject;
 }
 
-function transformateThemeToCSSObject<P extends {}>(props: P, theme: TFunctionalTheme<P>): CSSObject {
-	return Object.keys(theme).reduce(
-		(acc, key) => {
-			const value = theme[key];
-			switch (typeof value) {
-				case 'function': {
-					acc[key] = value(props);
-					break;
-				}
-				case 'string':
-				case 'number': {
-					acc[key] = value;
-				}
-			}
-			return acc;
-		},
-		{} as CSSObject,
-	);
-}
-
-const mergeTwoThemes = <P extends {}>(
+const mergeTwoThemes = <P extends object>(
 	props: P,
 	original: CSSObject = {},
 	mixin: TFunctionalTheme<P> = {},
@@ -86,21 +65,18 @@ const mergeTwoThemes = <P extends {}>(
 	Object.keys(mixin).forEach(key => {
 		const defaultValue = result[key];
 		const mixinValue = mixin[key];
-		console.log(defaultValue);
-		console.log(mixinValue);
 
 		switch (typeof mixinValue) {
 			case 'object': {
 				switch (typeof defaultValue) {
-					case 'object': {
-						console.log(key);
-						console.log(result[key]);
-						console.log(1);
-						result[key] = mergeThemes(props, defaultValue, mixinValue);
+					case 'string':
+					case 'number':
+					case 'undefined': {
+						result[key] = mergeThemes(props, mixinValue);
 						break;
 					}
-					case 'undefined': {
-						result[key] = transformateThemeToCSSObject(props, mixinValue);
+					case 'object': {
+						result[key] = mergeThemes(props, defaultValue, mixinValue);
 						break;
 					}
 					default: {
@@ -118,20 +94,17 @@ const mergeTwoThemes = <P extends {}>(
 				result[key] = mixinValue;
 				break;
 			}
+			case 'undefined': {
+				delete result[key];
+				break;
+			}
 			default: {
 				switch (typeof defaultValue) {
 					case 'object': {
 						throw new Error(`You are merging non-object ${mixinValue} with an object ${key}`);
 					}
-					case 'function': {
-						break;
-					}
+					case 'function':
 					case 'undefined': {
-						// result[key] = transformFunctionsToString(props, mixinValue);
-						break;
-					}
-					default: {
-						console.log(key);
 						break;
 					}
 				}

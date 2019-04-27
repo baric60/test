@@ -23,7 +23,7 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 
 			return (
 				<Fragment>
-					<DivStyled styles={theme.container}>
+					<DivStyled theme={theme.container}>
 						{/* <PrintStyled styles={theme.text}>Some name - {name}</PrintStyled>
 						<InputStyled
 							defaultValue={value}

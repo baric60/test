@@ -1,19 +1,18 @@
-import { CSSObject } from 'styled-components';
+import { MakeFunctionalTheme } from 'ex-platform/src/utils/theme.utils';
+import { TRawLayoutProps, TLayoutProps } from '../layout.component';
 
-export type TLayoutTheme = {
-	container: CSSObject;
-	wrapper: CSSObject;
-};
+export type TLayoutTheme = MakeFunctionalTheme<'container' | 'content', TRawLayoutProps['theme'], TLayoutProps>;
 
 const container = {
+	display: 'flex',
 	widht: '100%',
 };
 
-const wrapper = {
+const content = {
 	fontFamily: 'Helvetica',
 };
 
 export const theme: TLayoutTheme = {
 	container,
-	wrapper,
+	content,
 };

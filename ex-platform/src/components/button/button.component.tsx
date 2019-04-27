@@ -6,10 +6,13 @@ import { theme } from './theme/button.theme';
 import { withDefaults } from '../../utils/with-defaults.utils';
 import { withTheme } from '../../utils/with-theme.utils';
 import { PartialKey } from '../../utils/object.utils';
+import { constUndefined } from 'fp-ts/lib/function';
 export { TRawButtonProps } from './button.model';
 
 const defaults = {
 	count: 2,
+	onClick: constUndefined,
+	onDoubleClick: constUndefined,
 };
 
 export const DivStyled: FunctionComponent<TCustomStyledClassProps> = props => <CustomStyledClass {...props} />;
@@ -21,8 +24,8 @@ class RawButton extends Component<TRawButtonProps, TButtonState> {
 		console.log(theme);
 
 		return (
-			<DivStyled styles={theme.container}>
-				<DivStyled styles={theme.content} onClick={onClick} onDoubleClick={onDoubleClick}>
+			<DivStyled theme={theme.container}>
+				<DivStyled theme={theme.content} onClick={onClick} onDoubleClick={onDoubleClick}>
 					{icon}
 				</DivStyled>
 			</DivStyled>

@@ -23,7 +23,7 @@ describe('with-theme.utils', () => {
 			};
 			const theme: TFunctionalTheme<TComponentProps> = {
 				container: {
-					width: (props: TComponentProps) => props.value * 10,
+					width: props => props.value * 10,
 				},
 			};
 			const result: TTheme = {
@@ -35,18 +35,36 @@ describe('with-theme.utils', () => {
 			expect(mergeThemes(props, theme)).toEqual(result);
 		});
 
+		it('should delete unefined property', () => {
+			const theme1: TFunctionalTheme<TComponentProps> = {
+				container: {
+					color: 'red',
+				},
+			};
+			const theme2: TFunctionalTheme<TComponentProps> = {
+				container: {
+					color: undefined,
+				},
+			};
+			const result: TTheme = {
+				container: { color: undefined },
+			};
+
+			expect(mergeThemes(theme1, theme2)).toEqual(result);
+		});
+
 		it('should return result of function in second theme', () => {
 			const props: TComponentProps = {
 				value: 13,
 			};
 			const firstTheme: TFunctionalTheme<TComponentProps> = {
 				container: {
-					width: (props: TComponentProps) => props.value * 1,
+					width: props => props.value * 1,
 				},
 			};
 			const secondTheme: TFunctionalTheme<TComponentProps> = {
 				container: {
-					width: (props: TComponentProps) => props.value * 20,
+					width: props => props.value * 20,
 				},
 			};
 			const result: TTheme = {
@@ -138,9 +156,8 @@ describe('with-theme.utils', () => {
 					},
 				},
 			};
-
-			console.log(mergeThemes({}, firstTheme, secondTheme));
 			console.log(result);
+			console.log(mergeThemes(props, firstTheme, secondTheme));
 
 			expect(mergeThemes(props, firstTheme, secondTheme)).toEqual(result);
 		});

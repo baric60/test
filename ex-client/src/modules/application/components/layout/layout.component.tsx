@@ -1,23 +1,23 @@
 import * as React from 'react';
 import { Component, ComponentType } from 'react';
-import { StyledUtils } from 'ex-platform/src/utils/styled.utils';
-import withTheme = StyledUtils.withTheme;
+import { withTheme } from 'ex-platform/src/utils/with-theme.utils';
 import { theme } from './theme/layout.theme';
 import { DivStyled } from '../../../../common/components/styled.component';
-import { DefaultTheme } from 'styled-components';
 import { PartialKey } from 'ex-platform/src/utils/object.utils';
+import { TRawLayoutProps } from './layout.model';
+export { TRawLayoutProps } from './layout.model';
 
-export type TRawLayoutComponentProps = {
-	name?: string;
-	theme: DefaultTheme;
-};
-
-class RawLayoutComponent extends Component<TRawLayoutComponentProps> {
+class RawLayoutComponent extends Component<TRawLayoutProps> {
 	render() {
-		return <DivStyled styles={theme}>aaa</DivStyled>;
+		const { theme } = this.props;
+		return (
+			<DivStyled theme={theme.container}>
+				<DivStyled theme={theme.content}>aaa</DivStyled>
+			</DivStyled>
+		);
 	}
 }
 
-export type TLayoutComponentProps = PartialKey<TRawLayoutComponentProps, 'theme'>;
+export type TLayoutProps = PartialKey<TRawLayoutProps, 'theme'>;
 
-export const LayoutComponent: ComponentType<TLayoutComponentProps> = withTheme(theme)(RawLayoutComponent);
+export const LayoutComponent: ComponentType<TLayoutProps> = withTheme('LayoutComponent', theme)(RawLayoutComponent);

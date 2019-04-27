@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { TRawApplicationProps } from '../application.model';
-import { MakeFunctionalTheme } from 'ex-platform/src/utils/theme.utils';
+import { MakeFunctionalTheme, TFunctionalTheme } from 'ex-platform/src/utils/theme.utils';
 import { TRawButtonProps } from 'ex-platform/src/components/button/button.model';
 import { TApplicationProps } from '../application.component';
 
@@ -37,7 +37,7 @@ const button: TFunctionalApplicationTheme['button'] = {
 		height: () => '20px',
 	},
 	content: {},
-	icon1: {
+	icon: {
 		color: props => props.color,
 	},
 };

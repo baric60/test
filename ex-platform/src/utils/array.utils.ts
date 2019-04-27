@@ -1,3 +1,3 @@
 export namespace ArrayUtils {
-	export const empty: any[] = [];
+	export const empty: never[] = [];
 }

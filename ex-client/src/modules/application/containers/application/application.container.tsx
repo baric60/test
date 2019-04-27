@@ -33,10 +33,6 @@ const FooContainer = combine(ApplicationComponent, ApplicationComponent => {
 	return enhance(ApplicationComponent);
 });
 
-const result2 = combine(FooContainer, Container => {
-	return Container;
-});
-
-export const resolvedContainer = result2.run({
+export const resolvedContainer = FooContainer.run({
 	localStorage: LocalStorage,
 });
