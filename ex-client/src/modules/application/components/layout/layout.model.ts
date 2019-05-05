@@ -1,4 +1,4 @@
-import { MakeTheme, TTheme } from 'ex-platform/src/utils/theme.utils';
+import { MakeTheme, TTheme } from 'ex-platform/react-kit/src/utils/theme.utils';
 
 export type TRawLayoutProps = {
 	name?: string;

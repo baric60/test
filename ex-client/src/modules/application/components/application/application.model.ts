@@ -1,5 +1,5 @@
-import { MakeTheme, TTheme } from 'ex-platform/src/utils/theme.utils';
-import { TRawButtonProps } from 'ex-platform/src/components/button/button.model';
+import { MakeTheme, TTheme } from 'ex-platform/react-kit/src/utils/theme.utils';
+import { TRawButtonProps } from 'ex-platform/react-kit/src/components/button/button.model';
 
 export type TRawApplicationProps = {
 	color: string;

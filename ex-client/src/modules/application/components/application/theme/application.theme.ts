@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { TRawApplicationProps } from '../application.model';
-import { MakeFunctionalTheme, TFunctionalTheme } from 'ex-platform/src/utils/theme.utils';
-import { TRawButtonProps } from 'ex-platform/src/components/button/button.model';
+import { MakeFunctionalTheme, TFunctionalTheme } from 'ex-platform/react-kit/src/utils/theme.utils';
+import { TRawButtonProps } from 'ex-platform/react-kit/src/components/button/button.model';
 import { TApplicationProps } from '../application.component';
 
 type TFunctionalApplicationTheme = MakeFunctionalTheme<

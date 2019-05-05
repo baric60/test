@@ -8,7 +8,7 @@ export const toKeyValue = <A, Key extends string>(key: string) => (
 		map((value: A) => ({
 			[key as string]: value,
 		})),
-	) as any;
+	) as Observable<{ [K in Key]: A }>;
 };
 
 declare module 'rxjs/operators' {

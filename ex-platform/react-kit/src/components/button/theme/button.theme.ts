@@ -10,6 +10,7 @@ export type TFunctionalButtonTheme = MakeFunctionalTheme<
 
 const container: TFunctionalButtonTheme['container'] = {
 	display: 'flex',
+	padding: '10px',
 	background: props => (props.disabled ? 'red' : 'green'),
 };
 

@@ -1,13 +1,13 @@
-import { ReaderUtils } from 'ex-platform/src/utils/reader.utils';
+import { ReaderUtils } from 'ex-platform/react-kit/src/utils/reader.utils';
 import combine = ReaderUtils.combine;
 import { TLocalStorage, LocalStorage } from '../../../services/storage/storage.service';
-import { WithRxUtils } from 'ex-platform/src/utils/with-utils';
+import { WithRxUtils } from 'ex-platform/react-kit/src/utils/with-utils';
 import withRX = WithRxUtils.withRX;
 import { merge, of } from 'rxjs';
 import { compose } from 'fp-ts/lib/function';
-import { withDefaults } from 'ex-platform/src/utils/with-defaults.utils';
+import { withDefaults } from 'ex-platform/react-kit/src/utils/with-defaults.utils';
 import { TApplicationProps, ApplicationComponent } from '../../components/application/application.component';
-import { toKeyValue } from 'ex-platform/src/utils/rx.utils';
+import { toKeyValue } from 'ex-platform/react-kit/src/utils/rx.utils';
 
 type TApplicationContext = {
 	localStorage: TLocalStorage;

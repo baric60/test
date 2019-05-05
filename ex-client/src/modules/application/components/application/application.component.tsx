@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Component, Fragment } from 'react';
 import { LayoutContainer } from '../../containers/layout/layout.container';
-import { ReaderUtils } from 'ex-platform/src/utils/reader.utils';
+import { ReaderUtils } from 'ex-platform/react-kit/src/utils/reader.utils';
 import { theme, GlobalStyle } from './theme/application.theme';
 import { DivStyled } from '../../../../common/components/styled.component';
-import { PartialKey } from 'ex-platform/src/utils/object.utils';
+import { PartialKeys } from 'ex-platform/react-kit/src/utils/object.utils';
 import { Button } from '../../../../common/components/button/button.component';
-import { withTheme } from 'ex-platform/src/utils/with-theme.utils';
+import { withTheme } from 'ex-platform/react-kit/src/utils/with-theme.utils';
 import { TRawApplicationProps, TApplicationState } from './application.model';
 
 export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutContainer => {
@@ -53,4 +53,4 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 	return withTheme('ButtonComponent', theme)(RawApplication);
 });
 
-export type TApplicationProps = PartialKey<TRawApplicationProps, 'theme'>;
+export type TApplicationProps = PartialKeys<TRawApplicationProps, 'theme'>;

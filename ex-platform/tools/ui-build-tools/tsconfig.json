@@ -14,22 +14,9 @@
     "jsx": "react",
     "strictNullChecks": true,
     "importHelpers": true,
-    "lib": [
-      "es2016",
-      "dom",
-      "es2017.object",
-      "es2015.symbol",
-      "es2015.symbol.wellknown"
-    ],
+    "lib": ["es2016", "dom", "es2017.object"],
     "target": "es5",
     "pretty": true,
     "noUnusedLocals": true
-  },
-  "include": [
-    "typings/**/*",
-    "src/**/*"
-  ],
-  "exclude": [
-    "**/__tests__/*"
-  ]
+  }
 }

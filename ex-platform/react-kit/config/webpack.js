@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -6,11 +7,7 @@ const NODE_MODULES_PATH = (module.exports.NODE_MODULES_PATH = path.resolve(ROOT,
 const HOISTED_NODE_MODULES_PATH = (module.exports.HOISTED_NODE_MODULES_PATH = path.resolve(ROOT, '../node_modules'));
 
 module.exports = function() {
-	const index = [path.resolve(__dirname, '../src/components/button/button.component.tsx')];
-	const dist = path.resolve(path.join(process.cwd()), 'dist');
-
-	console.log(HOISTED_NODE_MODULES_PATH);
-
+	const config = getConfig();
 	return {
 		mode: 'development',
 
@@ -31,14 +28,6 @@ module.exports = function() {
 						},
 					],
 				},
-				{
-					test: /\.css$/,
-					loader: 'typings-for-css-modules-loader?modules&namedExport',
-				},
-				{
-					test: /\.styl$/,
-					loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/',
-				},
 			],
 		},
 
@@ -47,16 +36,51 @@ module.exports = function() {
 		},
 
 		entry: {
-			index,
+			...config.entry,
 		},
 
 		output: {
-			path: dist,
-			publicPath: '/',
-			filename: '[name].[hash].js',
+			...config.output,
 			pathinfo: true,
 		},
 
+		plugins: [...config.plugins],
+	};
+};
+
+const getConfig = () => {
+	const src = path.resolve(path.join(process.cwd()), 'src');
+	const dist = path.resolve(path.join(process.cwd()), 'dist');
+
+	const config = {
+		output: {
+			path: dist,
+			publicPath: '',
+		},
+		entry: {},
 		plugins: [new webpack.HotModuleReplacementPlugin(), new ForkTsCheckerWebpackPlugin()],
 	};
+
+	console.log(collectReportScripts());
+
+	collectReportScripts().forEach(script => {
+		console.log(script);
+		config.entry[script] = path.resolve(src, `${script}.tsx`);
+	});
+
+	return config;
+};
+
+const collectReportScripts = () => {
+	const src = path.resolve(path.join(process.cwd()), 'src');
+
+	console.log(src);
+
+	const files = fs.readdirSync(src);
+	console.log(files);
+
+	return files
+		.map(file => /^(.*)\.tsx$/i.exec(file))
+		.map(file => file && file[1])
+		.filter(file => !!file);
 };

@@ -2,13 +2,13 @@ import { createElement, Component, ComponentClass, ComponentType, Ref } from 're
 import { CSSObject } from 'styled-components';
 import { Omit } from 'lodash';
 export { CSSObject } from 'styled-components';
-import { PartialKey } from './object.utils';
+import { PartialKeys } from './object.utils';
 import { TTheme, TFunctionalTheme } from './theme.utils';
 
 type TTargetProps = { theme?: TFunctionalTheme<TTargetProps> };
 
 type CT<P> = ComponentType<P>;
-type OmitTheme<P extends TTargetProps> = PartialKey<P, 'theme'>;
+type OmitTheme<P extends TTargetProps> = PartialKeys<P, 'theme'>;
 type TResult<P extends TTargetProps, C extends ComponentType<P>> = ComponentClass<
 	OmitTheme<
 		P & {

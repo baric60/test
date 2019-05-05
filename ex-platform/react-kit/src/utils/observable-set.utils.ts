@@ -29,7 +29,7 @@ export class ObservableSet<V> {
 	};
 
 	public delete: (item: V) => boolean = item => {
-		const cached = this.getOrCreateEntity(item);
+		// const cached = this.getOrCreateEntity(item);
 
 		this.sources = this.sources.filter(entity => entity.value !== item);
 
@@ -41,9 +41,10 @@ export class ObservableSet<V> {
 	};
 
 	public get: (item: V) => V = item => {
-		const array = this.toArray();
+		// const array = this.toArray();
 
-		return array.find(element => element === item);
+		// return array.find(element => element === item);
+		return item;
 	};
 
 	public has: (item: V) => boolean = item => {
@@ -56,10 +57,10 @@ export class ObservableSet<V> {
 		return array;
 	};
 
-	public getSubscribe(item: V): BehaviorSubject<V> {
-		const source = this.sources.find(entity => entity.value === item);
-		return source.subject;
-	}
+	// public getSubscribe(item: V): BehaviorSubject<V> {
+	// 	const source = this.sources.find(entity => entity.value === item);
+	// 	return source.subject;
+	// }
 
 	public clear: () => void = () => {
 		this.cache.clear();

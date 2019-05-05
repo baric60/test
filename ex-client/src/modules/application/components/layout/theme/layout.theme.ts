@@ -1,4 +1,4 @@
-import { MakeFunctionalTheme } from 'ex-platform/src/utils/theme.utils';
+import { MakeFunctionalTheme } from 'ex-platform/react-kit/src/utils/theme.utils';
 import { TRawLayoutProps, TLayoutProps } from '../layout.component';
 
 export type TLayoutTheme = MakeFunctionalTheme<'container' | 'content', TRawLayoutProps['theme'], TLayoutProps>;

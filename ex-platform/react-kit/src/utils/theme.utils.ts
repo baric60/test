@@ -1,5 +1,4 @@
 import * as CSS from 'csstype';
-import { ThemeProps } from 'styled-components';
 
 type TStyle = CSS.Properties<string | number>[keyof CSS.Properties<string | number>];
 type TFunctionalStyle<P extends {}> = CSS.Properties<(props: P) => string | number>[keyof CSS.Properties<

@@ -12,7 +12,8 @@
     "release": "lerna publish",
     "ls": "lerna ls",
     "lerna": "lerna",
-    "platform": "cd ex-platform && npm run build",
+    "platform": "cd ex-platform/react-kit && npm run build",
+    "build:platform": "cd ex-platform/react-kit && npm run prebuild",
     "start:client": "npm run lerna -- run build --scope=ex-platform --parallel --scope=ex-client && npm run lerna -- run start",
     "test:platform": "npm run lerna -- run test --scope=ex-platform"
   },

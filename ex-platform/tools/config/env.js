@@ -1,0 +1,1 @@
+exports.ROOT = process.cwd();

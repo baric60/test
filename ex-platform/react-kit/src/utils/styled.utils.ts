@@ -1,7 +1,6 @@
 import { ComponentClass, Component, ComponentType, MouseEvent, ReactNode } from 'react';
-import styled, { StyledComponent, ThemeProvider, DefaultTheme } from 'styled-components';
+import styled, { StyledComponent /*, ThemeProvider, DefaultTheme*/ } from 'styled-components';
 import { createElement } from 'react';
-import { element } from 'prop-types';
 import * as CSS from 'csstype';
 import { TTheme } from './theme.utils';
 
@@ -75,13 +74,13 @@ export namespace StyledUtils {
 	) => (component: ComponentClass) => StyledComponent<ComponentClass<any>, P> = (name, styles) => target =>
 		styled(target).attrs({ as: 'titlesubtitle' })(styles);
 
-	export const withTheme = <P extends object>(theme: DefaultTheme) => (children: ComponentType<P>): ComponentType =>
-		class ThemeComponent<T extends object, U extends object> extends ThemeProvider {
-			static propTypes = { children: element };
+	// export const withTheme = <P extends object>(theme: DefaultTheme) => (children: ComponentType<P>): ComponentType =>
+	// 	class ThemeComponent<T extends object, U extends object> extends ThemeProvider {
+	// 		static propTypes = { children: element };
 
-			static defaultProps = {
-				theme,
-				children: createElement(children),
-			};
-		};
+	// 		static defaultProps = {
+	// 			theme,
+	// 			children: createElement(children),
+	// 		};
+	// 	};
 }
