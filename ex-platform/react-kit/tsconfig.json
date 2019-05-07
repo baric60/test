@@ -30,6 +30,7 @@
     "src/**/*"
   ],
   "exclude": [
-    "**/__tests__/*"
+    "**/__tests__/*",
+    "node_modules"
   ]
 }

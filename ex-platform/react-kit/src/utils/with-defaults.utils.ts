@@ -1,9 +1,9 @@
 import { ComponentType } from 'react';
-import { PartialKeys } from '../utils/object.utils';
+import { PartialKeys } from '@devexperts/utils/dist/object/object';
 
 export const withDefaults = <P extends object, Keys extends keyof P>(
-	defaults: object,
+	defaults: Pick<P, Keys>,
 ): ((Target: ComponentType<P>) => ComponentType<PartialKeys<P, Keys>>) => Target => {
-	Target.defaultProps = Object.assign({}, Target.defaultProps || {}, defaults);
-	return Target as any;
+	Target.defaultProps = Object.assign({}, Target.defaultProps || {}, defaults); // tslint:disable-line
+	return Target as any; // tslint:disable-line
 };

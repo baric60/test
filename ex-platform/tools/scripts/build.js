@@ -15,6 +15,8 @@ program
     const DIST_PATH = path.join(ROOT, dist);
     const TSCONFIG_PATH = path.join(ROOT, "tsconfig.json");
 
+    console.log(TSCONFIG_PATH);
+
     startSync(SRC_PATH, DIST_PATH);
     tsTransform(SRC_PATH, DIST_PATH, TSCONFIG_PATH);
   });

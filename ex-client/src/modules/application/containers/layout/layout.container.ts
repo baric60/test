@@ -1,11 +1,11 @@
 import { asks } from 'fp-ts/lib/reader';
 import { compose } from 'fp-ts/lib/function';
-import { withDefaults } from 'ex-platform/react-kit/src/utils/with-defaults.utils';
+import { withDefaults } from 'ex-platform/dist/utils/with-defaults.utils';
 import { LayoutComponent, TLayoutProps } from '../../components/layout/layout.component';
-import { WithRxUtils } from 'ex-platform/react-kit/src/utils/with-utils';
+import { WithRxUtils } from 'ex-platform/dist/utils/with-utils';
 import withRX = WithRxUtils.withRX;
 import { merge, of } from 'rxjs';
-import { toKeyValue } from 'ex-platform/react-kit/src/utils/rx.utils';
+import { toKeyValue } from 'ex-platform/dist/utils/rx.utils';
 
 export type LayoutContext = {
 	// localStorage: number;

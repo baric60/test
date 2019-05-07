@@ -136,7 +136,7 @@ export class RemoteInitial<A, L> {
 }
 
 export class RemoteFailure<A, L> {
-	readonly _URI: URI;
+	_URI: URI;
 	readonly _A: A;
 	readonly _L: L;
 	readonly status = RemoteDataStatus.Failure;

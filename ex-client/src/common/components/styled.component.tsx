@@ -5,7 +5,7 @@ import {
 	StyledInputClass,
 	TCustomStyledClassProps,
 	TStyledInputProps,
-} from 'ex-platform/react-kit/src//utils/styled.utils';
+} from 'ex-platform/dist//utils/styled.utils';
 
 export const DivStyled: FunctionComponent<TCustomStyledClassProps> = (props: TCustomStyledClassProps) => (
 	<CustomStyledClass {...props} />
