@@ -1,6 +1,6 @@
 import { asks } from 'fp-ts/lib/reader';
 import { compose } from 'fp-ts/lib/function';
-import { withDefaults } from 'ex-platform/dist/utils/with-defaults.utils';
+import { customWithDefaults } from 'ex-platform/dist/utils/with-defaults.utils';
 import { LayoutComponent, TLayoutProps } from '../../components/layout/layout.component';
 import { WithRxUtils } from 'ex-platform/dist/utils/with-utils';
 import withRX = WithRxUtils.withRX;
@@ -11,12 +11,10 @@ export type LayoutContext = {
 	// localStorage: number;
 };
 
-type Defaults = 'name';
-
 export const LayoutContainer = asks((ctx: LayoutContext) => {
 	const name$ = of('string');
 
-	const defaults = withDefaults<TLayoutProps, Defaults>({
+	const defaults = customWithDefaults<TLayoutProps>({
 		name: '',
 	});
 

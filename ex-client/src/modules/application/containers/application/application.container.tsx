@@ -5,17 +5,18 @@ import { WithRxUtils } from 'ex-platform/dist/utils/with-utils';
 import withRX = WithRxUtils.withRX;
 import { merge, of } from 'rxjs';
 import { compose } from 'fp-ts/lib/function';
-import { withDefaults } from 'ex-platform/dist/utils/with-defaults.utils';
+import { customWithDefaults } from 'ex-platform/dist/utils/with-defaults.utils';
 import { TApplicationProps, ApplicationComponent } from '../../components/application/application.component';
 import { toKeyValue } from 'ex-platform/dist/utils/rx.utils';
+import { ComponentType } from 'react';
 
 type TApplicationContext = {
 	localStorage: TLocalStorage;
 };
 
-type Defaults = 'color';
-const defaults = withDefaults<TApplicationProps, Defaults>({
+const defaults = customWithDefaults<TApplicationProps>({
 	color: 'aaa',
+	name: '',
 });
 
 const FooContainer = combine(ApplicationComponent, ApplicationComponent => {
@@ -30,7 +31,7 @@ const FooContainer = combine(ApplicationComponent, ApplicationComponent => {
 		rx,
 	);
 
-	return enhance(ApplicationComponent);
+	return enhance(ApplicationComponent as ComponentType<any>);
 });
 
 export const resolvedContainer = FooContainer.run({
