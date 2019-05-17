@@ -12,6 +12,8 @@ const defaults = {
 	count: 2,
 	onClick: constUndefined,
 	onDoubleClick: constUndefined,
+	icon: <span />,
+	theme: {},
 };
 
 // IntrinsicElements

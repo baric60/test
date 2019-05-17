@@ -31,7 +31,7 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 							size={this.calculateSize}
 							onChange={this.onChange}
 						/> */}
-						<Button theme={theme.button} />
+						<Button theme={theme.button} disabled={true} />
 						{/* <LayoutContainer /> */}
 					</DivStyled>
 					<GlobalStyle />

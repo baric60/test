@@ -6,4 +6,4 @@ export { TButtonProps } from 'ex-platform/dist/components/button/button.componen
 
 const icon = <SimpleIcon>Hello!</SimpleIcon>;
 
-export const Button: FunctionComponent<any> = props => <ExButton {...props} icon={icon} />;
+export const Button: FunctionComponent<TButtonProps> = props => <ExButton {...props} icon={icon} />;

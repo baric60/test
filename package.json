@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "update": "lerna clean && lerna bootstrap",
+    "lerna:update": "lerna clean && lerna bootstrap",
     "test": "lerna run test:ci",
     "clean": "lerna clean",
     "clean:build": "lerna exec -- rimraf lib",
@@ -14,7 +14,7 @@
     "lerna": "lerna",
     "platform": "cd ex-platform/react-kit && npm run build",
     "build:platform": "cd ex-platform/react-kit && npm run prebuild",
-    "start:client": "npm run lerna -- run build --scope=ex-platform --parallel --scope=ex-client && npm run lerna -- run start",
+    "start:client": "npm run lerna -- run build:dev --scope=ex-client",
     "test:platform": "npm run lerna -- run test --scope=ex-platform"
   },
   "devDependencies": {

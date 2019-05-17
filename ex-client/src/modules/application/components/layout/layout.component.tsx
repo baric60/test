@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Component, ComponentType } from 'react';
-import { withTheme } from 'ex-platform/dist/dist/utils/with-theme.utils';
+import { withTheme } from 'ex-platform/dist/utils/with-theme.utils';
 import { theme } from './theme/layout.theme';
 import { DivStyled } from '../../../../common/components/styled.component';
-import { PartialKeys } from 'ex-platform/dist/dist/utils/object.utils';
+import { PartialKeys } from 'ex-platform/dist/utils/object.utils';
 import { TRawLayoutProps } from './layout.model';
 export { TRawLayoutProps } from './layout.model';
 

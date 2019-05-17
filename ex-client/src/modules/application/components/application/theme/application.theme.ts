@@ -38,7 +38,7 @@ const button: TFunctionalApplicationTheme['button'] = {
 	},
 	content: {},
 	icon: {
-		color: props => props.color,
+		color: props => 'red',
 	},
 };
 

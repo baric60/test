@@ -14,7 +14,7 @@ type TApplicationContext = {
 };
 
 type Defaults = 'color';
-const defaults = withDefaults<TApplicationProps, Defaults>({
+const defaults = withDefaults({
 	color: 'aaa',
 });
 
@@ -30,7 +30,7 @@ const FooContainer = combine(ApplicationComponent, ApplicationComponent => {
 		rx,
 	);
 
-	return enhance(ApplicationComponent);
+	return enhance(ApplicationComponent as any);
 });
 
 export const resolvedContainer = FooContainer.run({

@@ -6,7 +6,7 @@ export type TRawButtonProps = {
 	disabled?: boolean;
 	onClick?: EventHandler<MouseEvent<HTMLElement>>;
 	onDoubleClick?: EventHandler<MouseEvent<HTMLElement>>;
-	icon?: ReactElement;
+	icon: ReactElement;
 	count: number;
 };
 

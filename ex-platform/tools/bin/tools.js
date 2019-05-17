@@ -2,6 +2,19 @@
 "use strict";
 
 const { Command } = require("commander");
+const path = require("path");
+const ENV = require("../config/env.js");
+
+require("babel-register")({
+  ignore(file) {
+    const filePath = path.resolve(file);
+
+    return (
+      filePath.startsWith(ENV.NODE_MODULES_PATH) ||
+      filePath.startsWith(ENV.HOISTED_NODE_MODULES_PATH)
+    );
+  }
+});
 
 const program = new Command();
 
