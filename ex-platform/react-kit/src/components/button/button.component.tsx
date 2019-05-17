@@ -1,25 +1,15 @@
 import * as React from 'react';
 import { Component, FunctionComponent } from 'react';
 import { TRawButtonProps, TButtonState } from './button.model';
-import { CustomStyledClass, TCustomStyledClassProps } from '../../utils/styled.utils';
+import { StyledComponent, TStyledComponentProps } from '../../utils/styled.utils';
 import { theme } from './theme/button.theme';
-import { withDefaults } from '../../utils/with-defaults.utils';
-import { withTheme } from '../../utils/with-theme.utils';
+import { customWithDefaults } from '../../utils/with-defaults.utils';
+import { withTheme } from '../../../dist/utils/with-theme.utils';
 import { PartialKeys } from '../../utils/object.utils';
 import { constUndefined } from 'fp-ts/lib/function';
+import { Icon } from '../icon/icon';
 
-const defaults = {
-	count: 2,
-	onClick: constUndefined,
-	onDoubleClick: constUndefined,
-	icon: <span />,
-	theme: {},
-};
-
-// IntrinsicElements
-// DOMAttributes
-
-const DivStyled: FunctionComponent<TCustomStyledClassProps> = props => <CustomStyledClass {...props} />;
+const DivStyled: FunctionComponent<TStyledComponentProps> = props => <StyledComponent {...props} />;
 
 class RawButton extends Component<TRawButtonProps, TButtonState> {
 	render() {
@@ -37,5 +27,12 @@ class RawButton extends Component<TRawButtonProps, TButtonState> {
 	}
 }
 
+export const defaultsProps = {
+	icon: <Icon />,
+	disabled: false,
+	onClick: constUndefined,
+	onDoubleClick: constUndefined,
+};
+
 export type TButtonProps = PartialKeys<TRawButtonProps, 'theme'>;
-export const Button = withTheme('ButtonComponent', theme)(withDefaults(defaults)(RawButton));
+export const Button = customWithDefaults(defaultsProps)(withTheme('ButtonComponent', theme as any)(RawButton));

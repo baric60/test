@@ -3,6 +3,7 @@ import { TRawApplicationProps } from '../application.model';
 import { MakeFunctionalTheme, TFunctionalTheme } from 'ex-platform/dist/utils/theme.utils';
 import { TRawButtonProps } from 'ex-platform/dist/components/button/button.model';
 import { TApplicationProps } from '../application.component';
+import console = require('console');
 
 type TFunctionalApplicationTheme = MakeFunctionalTheme<
 	'container' | 'input' | 'text',
@@ -33,12 +34,14 @@ const text = {
 const button: TFunctionalApplicationTheme['button'] = {
 	container: {
 		display: 'flex',
-		width: () => '20px',
+		flexDirection: 'column',
+		width: () => '300px',
 		height: () => '20px',
+		alignItems: 'center',
 	},
 	content: {},
 	icon: {
-		color: props => 'red',
+		color: 'red',
 	},
 };
 

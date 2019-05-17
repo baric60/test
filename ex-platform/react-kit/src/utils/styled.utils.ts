@@ -1,59 +1,59 @@
-import { ComponentClass, Component, ComponentType, MouseEvent, ReactNode } from 'react';
-import styled, { StyledComponent /*, ThemeProvider, DefaultTheme*/ } from 'styled-components';
-import { createElement } from 'react';
+import { Component, ComponentType, createElement, MouseEvent, ReactNode } from 'react';
+import styled, { StyledComponent as TStyledComponent } from 'styled-components';
 import * as CSS from 'csstype';
 import { TTheme } from './theme.utils';
+import { customWithDefaults } from './with-defaults.utils';
+import { constUndefined } from 'fp-ts/lib/function';
 
 export type TStyles = { [property in string]: CSS.Properties<string | number>[keyof CSS.Properties<string | number>] };
-export type TFunctionalStyledComponent<P extends object> = (props: P) => StyledComponent<ComponentType, P>;
+export type TFunctionalStyledComponent<P extends object> = (props: P) => TStyledComponent<ComponentType, P>;
 
-export type TCustomStyledClassProps = {
-	theme?: TTheme;
-	as?: 'div' | 'p' | 'ul' | 'li' | 'a';
-	children?: ReactNode;
-	className?: string;
-	onClick?: (event: MouseEvent<HTMLElement>) => void;
-	onDoubleClick?: (event: MouseEvent<HTMLElement>) => void;
+export type TComponentTag = 'div' | 'p' | 'ul' | 'li' | 'a';
+
+type TRawStyledClassProps = {
+	theme: TTheme;
+	as: TComponentTag;
+	children: ReactNode;
+	onClick: (event: MouseEvent<HTMLElement>) => void;
+	onDoubleClick: (event: MouseEvent<HTMLElement>) => void;
 };
 
-export class CustomStyledClass extends Component<TCustomStyledClassProps, {}> {
-	static defaultProps = {
-		as: 'div',
-		theme: {},
-	};
-
+class StyledComponentClass extends Component<TRawStyledClassProps> {
 	render() {
-		const { theme = {}, as: tag = 'div', children } = this.props;
-		const element = styled(tag)(theme);
+		const { theme, as, children } = this.props;
+		const element = styled(as)(theme);
 		return createElement(element, {}, children);
 	}
 }
 
-export type TStyledInputProps = {
-	theme: TTheme;
-	type?: 'input' | 'text' | 'checkbox' | 'submit';
-	value?: string;
-	defaultValue?: string;
-	// size?: number | ((props: ThemedStyledProps<CSSObject, any>) => number);
-	onChange?: (value: string) => void;
+const defaults: TRawStyledClassProps = {
+	theme: {},
+	as: 'div',
+	children: null,
+	onClick: constUndefined,
+	onDoubleClick: constUndefined,
 };
 
-export class StyledInputClass extends Component<TStyledInputProps, {}> {
-	static defaultProps = {
-		type: 'text',
-		theme: {},
-		defaultValue: '',
-		size: 100,
-		onChange: () => {},
-	};
+export type TStyledComponentProps = Partial<TRawStyledClassProps>;
+export const StyledComponent = customWithDefaults<TStyledComponentProps>(defaults)(StyledComponentClass);
 
+export type TInputTag = 'text' | 'textarea';
+
+type TRawStyledInputProps = {
+	theme: TTheme;
+	type: TInputTag;
+	value: string;
+	defaultValue: string;
+	onChange: (value: string) => void;
+};
+
+class StyledInputClass extends Component<TRawStyledInputProps> {
 	render() {
 		const { theme, type, defaultValue, children } = this.props;
 		// const onChange = this.onChange;
 		const element = styled.input.attrs({
 			type,
 			defaultValue,
-			// size,
 			// onChange,
 			children,
 		})(theme);
@@ -67,20 +67,13 @@ export class StyledInputClass extends Component<TStyledInputProps, {}> {
 	// };
 }
 
-export namespace StyledUtils {
-	export const styledComponent: <P extends Object>(
-		name: string | symbol,
-		styles: TTheme,
-	) => (component: ComponentClass) => StyledComponent<ComponentClass<any>, P> = (name, styles) => target =>
-		styled(target).attrs({ as: 'titlesubtitle' })(styles);
+const defaultProps: TRawStyledInputProps = {
+	type: 'text',
+	theme: {},
+	value: '',
+	defaultValue: '',
+	onChange: constUndefined,
+};
 
-	// export const withTheme = <P extends object>(theme: DefaultTheme) => (children: ComponentType<P>): ComponentType =>
-	// 	class ThemeComponent<T extends object, U extends object> extends ThemeProvider {
-	// 		static propTypes = { children: element };
-
-	// 		static defaultProps = {
-	// 			theme,
-	// 			children: createElement(children),
-	// 		};
-	// 	};
-}
+export type TStyledInputProps = Partial<TRawStyledInputProps>;
+export const StyledInput = customWithDefaults<TRawStyledInputProps>(defaultProps)(StyledInputClass);

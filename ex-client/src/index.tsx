@@ -1,10 +1,11 @@
+import * as React from 'react';
+import { ComponentType } from 'react';
 import * as ReactDOM from 'react-dom';
 import { resolvedContainer } from './modules/application/containers/application/application.container';
-import * as React from 'react';
 
 const root = document.getElementById('root');
 
-const render = (Component: any) => {
+const render = (Component: ComponentType) => {
 	let container = <Component />;
 
 	ReactDOM.render(container, root);
