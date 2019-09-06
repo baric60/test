@@ -112,13 +112,14 @@ describe('with-theme.utils', () => {
 				},
 			};
 			const firstTheme: TFunctionalTheme<TComponentProps> = {
-				...container,
-				...button,
+				container,
+				button,
 			};
 			const secondTheme: TFunctionalTheme<TComponentProps> = {
 				container: {
 					...container,
 					...{
+						color: () => 'black',
 						width: '30px',
 						background: () => 'red',
 					},
@@ -141,7 +142,7 @@ describe('with-theme.utils', () => {
 				container: {
 					height: '30px',
 					width: '30px',
-					color: 'green',
+					color: 'black',
 					background: 'red',
 				},
 				button: {
@@ -156,8 +157,6 @@ describe('with-theme.utils', () => {
 					},
 				},
 			};
-			console.log(result);
-			console.log(mergeThemes(props, firstTheme, secondTheme));
 
 			expect(mergeThemes(props, firstTheme, secondTheme)).toEqual(result);
 		});

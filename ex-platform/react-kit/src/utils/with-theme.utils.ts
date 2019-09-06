@@ -4,6 +4,7 @@ import { Omit } from 'lodash';
 export { CSSObject } from 'styled-components';
 import { PartialKeys } from './object.utils';
 import { TTheme, TFunctionalTheme } from './theme.utils';
+import console = require('console');
 
 type TTargetProps = { theme?: TFunctionalTheme<TTargetProps> };
 
@@ -45,6 +46,11 @@ export const withTheme = <S extends object>(name: string, defaultTheme: TFunctio
 	return decorate;
 };
 
+/**
+ * 
+ * @param props props of component
+ * @param themes spread with theme objects
+ */
 export function mergeThemes<P extends object>(props: P, ...themes: TFunctionalTheme<P>[]): CSSObject {
 	return themes.reduce(
 		(acc: CSSObject, theme: TFunctionalTheme<P>) => mergeTwoThemes(props, acc, theme),
