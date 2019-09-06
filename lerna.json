@@ -1,10 +1,5 @@
 {
-  "packages": [
-    "ex-client",
-    "ex-backend",
-    "ex-platform/react-kit",
-    "ex-platform/tools"
-  ],
+  "packages": ["ex-client", "ex-platform/react-kit", "ex-platform/tools"],
   "command": {
     "bootstrap": {
       "hoist": ["**"]

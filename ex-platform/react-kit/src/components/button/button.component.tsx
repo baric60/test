@@ -1,17 +1,23 @@
 import * as React from 'react';
-import { Component, FunctionComponent } from 'react';
-import { TRawButtonProps, TButtonState } from './button.model';
-import { StyledComponent, TStyledComponentProps } from '../../utils/styled.utils';
+import { Component, ReactElement, EventHandler, MouseEvent } from 'react';
 import { theme } from './theme/button.theme';
 import { customWithDefaults } from '../../utils/with-defaults.utils';
 import { withTheme } from '../../../dist/utils/with-theme.utils';
 import { PartialKeys } from '../../utils/object.utils';
 import { constUndefined } from 'fp-ts/lib/function';
 import { Icon } from '../icon/icon';
+import { DivStyled } from '../styled-wrapper/styled-wrapper.component';
+import { TTheme, MakeTheme } from '../../../dist/utils/theme.utils';
 
-const DivStyled: FunctionComponent<TStyledComponentProps> = props => <StyledComponent {...props} />;
+type TRawButtonProps = {
+	theme: MakeTheme<'container' | 'content' | 'icon', TTheme>;
+	icon: ReactElement;
+	disabled: boolean;
+	onClick?: EventHandler<MouseEvent<HTMLElement>>;
+	onDoubleClick?: EventHandler<MouseEvent<HTMLElement>>;
+};
 
-class RawButton extends Component<TRawButtonProps, TButtonState> {
+class RawButton extends Component<TRawButtonProps> {
 	render() {
 		const { theme, icon, onClick, onDoubleClick } = this.props;
 
@@ -35,4 +41,4 @@ export const defaultsProps = {
 };
 
 export type TButtonProps = PartialKeys<TRawButtonProps, 'theme'>;
-export const Button = customWithDefaults(defaultsProps)(withTheme('ButtonComponent', theme as any)(RawButton));
+export const Button = customWithDefaults(defaultsProps)(withTheme('ButtonComponent', theme)(RawButton));

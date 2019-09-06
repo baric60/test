@@ -3,7 +3,6 @@ import { TRawApplicationProps } from '../application.model';
 import { MakeFunctionalTheme, TFunctionalTheme } from 'ex-platform/dist/utils/theme.utils';
 import { TRawButtonProps } from 'ex-platform/dist/components/button/button.model';
 import { TApplicationProps } from '../application.component';
-import console = require('console');
 
 type TFunctionalApplicationTheme = MakeFunctionalTheme<
 	'container' | 'input' | 'text',

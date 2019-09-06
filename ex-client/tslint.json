@@ -11,11 +11,9 @@
             "from": [
               "."
             ],
-            "to": [
-              "../ex-backend/src",
-            ]
+            "to": []
           }
         ],
         "no-duplicate-switch-case": true
-      },
+      }
 }

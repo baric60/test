@@ -1,11 +1,9 @@
-import { TRawButtonProps } from '../button.model';
 import { TButtonProps } from '../button.component';
 import { MakeFunctionalTheme } from '../../../utils/theme.utils';
-import console = require('console');
 
 export type TFunctionalButtonTheme = MakeFunctionalTheme<
 	'container' | 'content',
-	TRawButtonProps['theme'],
+	TButtonProps & { theme: any },
 	TButtonProps
 >;
 
