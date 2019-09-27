@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = function() {
+module.exports = function () {
 	return {
 		mode: 'development',
 
@@ -60,7 +60,6 @@ module.exports = function() {
 		devServer: {
 			contentBase: path.join(__dirname, 'dist'),
 			compress: true,
-			port: 8888,
 		},
 	};
 };

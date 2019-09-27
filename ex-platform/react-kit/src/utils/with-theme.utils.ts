@@ -1,43 +1,27 @@
-import { createElement, Component, ComponentClass, ComponentType, Ref } from 'react';
+import { createElement, Component, ComponentType } from 'react';
 import { CSSObject } from 'styled-components';
-import { Omit } from 'lodash';
-export { CSSObject } from 'styled-components';
-import { PartialKeys } from './object.utils';
-import { TTheme, TFunctionalTheme } from './theme.utils';
-import console = require('console');
+import { TFunctionalTheme, NonFunctionalTheme, TTheme } from './theme.utils';
 
 type TTargetProps = { theme?: TFunctionalTheme<TTargetProps> };
 
 type CT<P> = ComponentType<P>;
-type OmitTheme<P extends TTargetProps> = PartialKeys<P, 'theme'>;
-type TResult<P extends TTargetProps, C extends ComponentType<P>> = ComponentClass<
-	OmitTheme<
-		P & {
-			withRef?: Ref<never>;
-		}
-	>
->;
 
-type TResultProps<P extends TTargetProps> = Omit<P, 'theme'> & {
-	theme?: P['theme'];
-};
-type TWithRef<P extends TTargetProps, C> = TResultProps<P> & {
-	withRef?: Ref<C>;
-	theme: TTheme;
-};
+// type TWithRef<P extends TTargetProps, C> = TResultProps<P> & {
+// 	withRef?: Ref<C>;
+// 	theme: TTheme;
+// };
 
 export const withTheme = <S extends object>(name: string, defaultTheme: TFunctionalTheme<S>) => {
-	function decorate<P extends TTargetProps>(target: CT<P>): TResult<P, CT<P>> {
-		return class ThemedComponent extends Component<TWithRef<P, ComponentClass<TResultProps<P>>>, never> {
+	function decorate<P extends TTargetProps>(target: CT<P>): CT<any> {
+		return class ThemedComponent extends Component<TTargetProps> {
 			render() {
-				const { withRef } = this.props;
-				const rest: any = Object.assign({}, this.props);
+				const { theme, ...rest } = this.props;
 
 				const props = {
 					...rest,
-					ref: withRef,
-					theme: mergeThemes(this.props, defaultTheme as any, rest.theme),
+					theme: mergeThemes(this.props, defaultTheme, theme),
 				};
+
 				return createElement(target, props);
 			}
 		};
@@ -47,9 +31,9 @@ export const withTheme = <S extends object>(name: string, defaultTheme: TFunctio
 };
 
 /**
- * 
- * @param props props of component
- * @param themes spread with theme objects
+ *
+ * @param {object} props props of component
+ * @param themes spread with themes
  */
 export function mergeThemes<P extends object>(props: P, ...themes: TFunctionalTheme<P>[]): CSSObject {
 	return themes.reduce(
@@ -92,7 +76,7 @@ const mergeTwoThemes = <P extends object>(
 				break;
 			}
 			case 'function': {
-				result[key] = mixinValue(props);
+				result[key] = mixinValue(transform<P>(props));
 				break;
 			}
 			case 'string':
@@ -121,3 +105,18 @@ const mergeTwoThemes = <P extends object>(
 
 	return result;
 };
+
+function transform<P extends object, R = NonFunctionalTheme<P>>(props: P): R {
+	return Object.keys(props)
+		.filter(key => {
+			switch (typeof props[key]) {
+				case 'string':
+				case 'number':
+				case 'boolean':
+					return true;
+				default:
+					return false;
+			}
+		})
+		.reduce((acc, key) => ({ ...acc, [key]: props[key] }), {} as R);
+}

@@ -2,12 +2,22 @@ import * as React from 'react';
 import { Component, Fragment } from 'react';
 import { LayoutContainer } from '../../containers/layout/layout.container';
 import { ReaderUtils } from 'ex-platform/dist/utils/reader.utils';
-import { theme, GlobalStyle } from './theme/application.theme';
+import { theme } from './theme/application.theme';
 import { DivStyled } from '../../../../common/components/styled.component';
 import { PartialKeys } from 'ex-platform/dist/utils/object.utils';
-import { Button } from '../../../../common/components/button/button.component';
+import { Button, TButtonProps } from '../../../../common/components/button/button.component';
 import { withTheme } from 'ex-platform/dist/utils/with-theme.utils';
-import { TRawApplicationProps, TApplicationState } from './application.model';
+import { MakeTheme } from 'ex-platform/dist/utils/theme.utils';
+
+export type TRawApplicationProps = {
+	name: string;
+	color: string;
+	theme: MakeTheme<'container' | 'contnet' | 'input' | 'text'> & MakeTheme<'button', TButtonProps['theme']>;
+};
+
+export type TApplicationState = {
+	value: string;
+};
 
 export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutContainer => {
 	class RawApplication extends Component<TRawApplicationProps, TApplicationState> {
@@ -31,7 +41,6 @@ export const ApplicationComponent = ReaderUtils.combine(LayoutContainer, LayoutC
 						<Button theme={theme.button} disabled={true} />
 						{/* <LayoutContainer /> */}
 					</DivStyled>
-					<GlobalStyle />
 				</Fragment>
 			);
 		}

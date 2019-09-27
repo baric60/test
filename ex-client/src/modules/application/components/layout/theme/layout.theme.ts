@@ -1,18 +1,12 @@
-import { MakeFunctionalTheme } from 'ex-platform/dist/utils/theme.utils';
-import { TRawLayoutProps, TLayoutProps } from '../layout.component';
+import { DinamicTheme } from 'ex-platform/dist/utils/theme.utils';
+import { TRawLayoutProps } from "../layout.component";
 
-export type TLayoutTheme = MakeFunctionalTheme<'container' | 'content', TRawLayoutProps['theme'], TLayoutProps>;
-
-const container = {
-	display: 'flex',
-	widht: '100%',
-};
-
-const content = {
-	fontFamily: 'Helvetica',
-};
-
-export const theme: TLayoutTheme = {
-	container,
-	content,
+export const theme: DinamicTheme<TRawLayoutProps> = {
+	container: {
+		display: 'flex',
+		widht: '100%',
+	},
+	content: {
+		fontFamily: 'Helvetica',
+	},
 };

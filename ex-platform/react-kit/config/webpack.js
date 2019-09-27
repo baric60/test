@@ -4,9 +4,9 @@ const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ROOT = (module.exports.ROOT = path.join(process.cwd()));
 const NODE_MODULES_PATH = (module.exports.NODE_MODULES_PATH = path.resolve(ROOT, 'node_modules'));
-const HOISTED_NODE_MODULES_PATH = (module.exports.HOISTED_NODE_MODULES_PATH = path.resolve(ROOT, '../node_modules'));
+const HOISTED_NODE_MODULES_PATH = (module.exports.HOISTED_NODE_MODULES_PATH = path.resolve(ROOT, '../../node_modules'));
 
-module.exports = function() {
+module.exports = function () {
 	const config = getConfig();
 	return {
 		mode: 'development',
@@ -27,6 +27,11 @@ module.exports = function() {
 							},
 						},
 					],
+				},
+				{
+					test: /\.jsx?$/,
+					use: 'babel-loader',
+					exclude: [NODE_MODULES_PATH, HOISTED_NODE_MODULES_PATH],
 				},
 			],
 		},
@@ -74,10 +79,7 @@ const getConfig = () => {
 const collectReportScripts = () => {
 	const src = path.resolve(path.join(process.cwd()), 'src');
 
-	console.log(src);
-
 	const files = fs.readdirSync(src);
-	console.log(files);
 
 	return files
 		.map(file => /^(.*)\.tsx$/i.exec(file))

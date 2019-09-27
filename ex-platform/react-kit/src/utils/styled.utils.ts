@@ -1,12 +1,8 @@
-import { Component, ComponentType, createElement, MouseEvent, ReactNode } from 'react';
-import styled, { StyledComponent as TStyledComponent } from 'styled-components';
-import * as CSS from 'csstype';
+import { Component, createElement, MouseEvent, ReactNode } from 'react';
+import styled from 'styled-components';
 import { TTheme } from './theme.utils';
 import { customWithDefaults } from './with-defaults.utils';
 import { constUndefined } from 'fp-ts/lib/function';
-
-export type TStyles = { [property in string]: CSS.Properties<string | number>[keyof CSS.Properties<string | number>] };
-export type TFunctionalStyledComponent<P extends object> = (props: P) => TStyledComponent<ComponentType, P>;
 
 export type TComponentTag = 'div' | 'p' | 'ul' | 'li' | 'a';
 

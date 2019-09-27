@@ -60,6 +60,7 @@ describe('with-theme.utils', () => {
 			const firstTheme: TFunctionalTheme<TComponentProps> = {
 				container: {
 					width: props => props.value * 1,
+					height: props => props.value + 14,
 				},
 			};
 			const secondTheme: TFunctionalTheme<TComponentProps> = {
@@ -70,6 +71,7 @@ describe('with-theme.utils', () => {
 			const result: TTheme = {
 				container: {
 					width: 260,
+					height: 27,
 				},
 			};
 

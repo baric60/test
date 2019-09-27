@@ -1,20 +1,23 @@
-import * as CSS from 'csstype';
+import { Properties } from 'csstype';
 
-type TStyle = CSS.Properties<string | number>[keyof CSS.Properties<string | number>];
-type TFunctionalStyle<P extends {}> = CSS.Properties<(props: P) => string | number>[keyof CSS.Properties<
-	(props: P) => string | number
+type TStyle = Properties<string | number>[keyof Properties<string | number>];
+
+type TFunctionalStyle<P extends object> = Properties<(props: NonFunctionalTheme<P>) => string | number>[keyof Properties<
+	(props: NonFunctionalTheme<P>) => string | number
 >];
 
 export type TTheme = { [key in string]: TStyle | TTheme };
 
-export type MakeTheme<K extends string, T = string> = { [P in K]?: T };
+export type MakeTheme<K extends string, T = TTheme> = { [P in K]?: T };
 
-export type TFunctionalTheme<P extends {}> = { [key in string]: TStyle | TFunctionalStyle<P> | TFunctionalTheme<P> };
-
-export type MakeFunctionalTheme<K extends string, T extends TTheme, P extends object> = {
-	[Element in K]: { [Key in keyof T]: TFunctionalTheme<P> } | TFunctionalTheme<P>
+export type TFunctionalTheme<P extends object = never> = {
+	[key in string]: TStyle | TFunctionalStyle<P> | TFunctionalTheme<P>;
 };
 
-export type RevertFunctionalTheme<K extends string, T extends TFunctionalTheme<{}>> = {
-	[Element in K]: { [Key in keyof T]: TTheme } | TTheme
+export type DinamicTheme<P extends object & { theme: TTheme } = never> = {
+	[Key in keyof P['theme']]: TFunctionalTheme<Omit<P, 'theme'>>;
 };
+
+type NonFunctionPropertyNames<T extends object> = { [K in keyof T]: T[K] extends string | boolean | number ? K : never }[keyof T];
+
+export type NonFunctionalTheme<P extends object> = Pick<P, NonFunctionPropertyNames<P>>;
