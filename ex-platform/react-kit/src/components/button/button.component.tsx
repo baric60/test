@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Component, MouseEvent } from 'react';
+import { PureComponent, MouseEvent } from 'react';
 import { theme } from './theme/button.theme';
 import { withDefaults } from '../../utils/with-defaults.utils';
 import { withTheme } from '../../utils/with-theme.utils';
@@ -16,7 +16,7 @@ export type TRawButtonProps = {
 	onDoubleClick?: () => void;
 };
 
-class RawButton extends Component<TRawButtonProps> {
+class RawButton extends PureComponent<TRawButtonProps> {
 	render() {
 		const { theme, icon } = this.props;
 

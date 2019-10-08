@@ -6,12 +6,7 @@ type TTargetProps = { theme?: TFunctionalTheme<TTargetProps> };
 
 type CT<P> = ComponentType<P>;
 
-// type TWithRef<P extends TTargetProps, C> = TResultProps<P> & {
-// 	withRef?: Ref<C>;
-// 	theme: TTheme;
-// };
-
-export const withTheme = <S extends object>(name: string, defaultTheme: TFunctionalTheme<S>) => {
+export const withTheme = <S extends object>(name: string | symbol, defaultTheme: TFunctionalTheme<S>) => {
 	function decorate<P extends TTargetProps>(target: CT<P>): CT<any> {
 		return class ThemedComponent extends Component<TTargetProps> {
 			render() {

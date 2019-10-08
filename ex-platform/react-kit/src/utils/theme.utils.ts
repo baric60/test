@@ -1,4 +1,5 @@
 import { Properties } from 'csstype';
+import { Option } from 'fp-ts/lib/Option';
 
 type TStyle = Properties<string | number>[keyof Properties<string | number>];
 
@@ -18,6 +19,7 @@ export type DinamicTheme<P extends object & { theme: TTheme } = never> = {
 	[Key in keyof P['theme']]: TFunctionalTheme<Omit<P, 'theme'>>;
 };
 
-type NonFunctionPropertyNames<T extends object> = { [K in keyof T]: T[K] extends string | boolean | number ? K : never }[keyof T];
+type AvailableTypes = string | boolean | number | Option<string>;
+type NonFunctionPropertyNames<T extends object> = { [K in keyof T]: T[K] extends AvailableTypes ? K : never }[keyof T];
 
 export type NonFunctionalTheme<P extends object> = Pick<P, NonFunctionPropertyNames<P>>;

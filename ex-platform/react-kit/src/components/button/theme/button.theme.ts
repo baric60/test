@@ -5,10 +5,10 @@ export const theme: DinamicTheme<TRawButtonProps> = {
 	container: {
 		display: 'flex',
 		padding: '10px',
-		background: props => (props ? 'red' : 'green'),
+		background: props => props.disabled ? 'red' : 'green',
 	},
 	content: {
-		color: props => (props ? 'white' : 'black'),
+		color: props => props.disabled ? 'white' : 'black',
 		fontSize: () => `20px`,
 	},
 };
